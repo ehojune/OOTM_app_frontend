@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -47,9 +48,9 @@ public class MainActivity extends AppCompatActivity {
         //ViewPager과 TabLayout 연결
         tabLayout.setupWithViewPager(viewPager);
 
-        tabLayout.getTabAt(0).setText("첫 번째");
-        tabLayout.getTabAt(1).setText("두 번째");
-        tabLayout.getTabAt(2).setText("세 번째");
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_baseline_home_24);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_baseline_bookmark_24);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_baseline_person_24);
     }
 
     private void getHashKey(){
