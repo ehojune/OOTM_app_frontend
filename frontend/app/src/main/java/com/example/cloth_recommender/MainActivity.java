@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         //FragmentAdapter에 컬렉션 담기
         adapter.addFragment(new Frag1());
         adapter.addFragment(new Frag2());
-        adapter.addFragment(new LoginActivity());
+        adapter.addFragment(new LoginViewActivity());
 
         //ViewPager Fragment 연결
         viewPager.setAdapter(adapter);

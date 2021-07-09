@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.kakao.auth.ISessionCallback;
@@ -21,19 +22,17 @@ import com.kakao.usermgmt.response.MeV2Response;
 import com.kakao.util.OptionalBoolean;
 import com.kakao.util.exception.KakaoException;
 
-public class LoginActivity extends Fragment {
+public class LoginActivity extends AppCompatActivity {
     private SessionCallback sessionCallback;
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        View view = inflater.inflate(R.layout.frag3_login, null);
+        setContentView(R.layout.frag3_login);
 
         sessionCallback = new SessionCallback();
         Session.getCurrentSession().addCallback(sessionCallback);
         Session.getCurrentSession().checkAndImplicitOpen();
-        return view;
     }
 
     @Override
@@ -59,21 +58,24 @@ public class LoginActivity extends Fragment {
                     int result = errorResult.getErrorCode();
 
                     if(result == ApiErrorCode.CLIENT_ERROR_CODE) {
-                        Toast.makeText(getActivity().getApplicationContext(), "네트워크 연결이 불안정합니다. 다시 시도해 주세요.", Toast.LENGTH_SHORT).show();
-                        getActivity().finish();
+                        Toast.makeText(getApplicationContext(), "네트워크 연결이 불안정합니다. 다시 시도해 주세요.", Toast.LENGTH_SHORT).show();
+                        finish();
                     } else {
-                        Toast.makeText(getActivity().getApplicationContext(),"로그인 도중 오류가 발생했습니다: "+errorResult.getErrorMessage(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"로그인 도중 오류가 발생했습니다: "+errorResult.getErrorMessage(),Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 @Override
                 public void onSessionClosed(ErrorResult errorResult) {
-                    Toast.makeText(getActivity().getApplicationContext(),"세션이 닫혔습니다. 다시 시도해 주세요: "+errorResult.getErrorMessage(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"세션이 닫혔습니다. 다시 시도해 주세요: "+errorResult.getErrorMessage(),Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onSuccess(MeV2Response result) {
-                    Intent intent = new Intent(getActivity().getApplicationContext(), LoginViewActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    /*
+                    Intent intent = new Intent(getApplicationContext(), LoginViewActivity.class);*/
+
                     intent.putExtra("name", result.getNickname());
                     intent.putExtra("profile", result.getProfileImagePath());
 
@@ -94,7 +96,6 @@ public class LoginActivity extends Fragment {
                     else
                         intent.putExtra("birthday", "none");
 
-
                     startActivity(intent);
                 }
             });
@@ -102,7 +103,7 @@ public class LoginActivity extends Fragment {
 
         @Override
         public void onSessionOpenFailed(KakaoException e) {
-            Toast.makeText(getActivity().getApplicationContext(), "로그인 도중 오류가 발생했습니다. 인터넷 연결을 확인해주세요: "+e.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "로그인 도중 오류가 발생했습니다. 인터넷 연결을 확인해주세요: "+e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
 }
