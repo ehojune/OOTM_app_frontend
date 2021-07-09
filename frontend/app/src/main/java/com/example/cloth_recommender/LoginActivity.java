@@ -18,6 +18,7 @@ import com.kakao.usermgmt.ApiErrorCode;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.MeV2ResponseCallback;
 import com.kakao.usermgmt.response.MeV2Response;
+import com.kakao.util.OptionalBoolean;
 import com.kakao.util.exception.KakaoException;
 
 public class LoginActivity extends Fragment {
@@ -75,6 +76,25 @@ public class LoginActivity extends Fragment {
                     Intent intent = new Intent(getActivity().getApplicationContext(), LoginViewActivity.class);
                     intent.putExtra("name", result.getNickname());
                     intent.putExtra("profile", result.getProfileImagePath());
+
+                    if(result.getKakaoAccount().hasEmail() == OptionalBoolean.TRUE)
+                        intent.putExtra("email", result.getKakaoAccount().getEmail());
+                    else
+                        intent.putExtra("email", "none");
+                    if(result.getKakaoAccount().hasAgeRange() == OptionalBoolean.TRUE)
+                        intent.putExtra("ageRange", result.getKakaoAccount().getAgeRange().getValue());
+                    else
+                        intent.putExtra("ageRange", "none");
+                    if(result.getKakaoAccount().hasGender() == OptionalBoolean.TRUE)
+                        intent.putExtra("gender", result.getKakaoAccount().getGender().getValue());
+                    else
+                        intent.putExtra("gender", "none");
+                    if(result.getKakaoAccount().hasBirthday() == OptionalBoolean.TRUE)
+                        intent.putExtra("birthday", result.getKakaoAccount().getBirthday());
+                    else
+                        intent.putExtra("birthday", "none");
+
+
                     startActivity(intent);
                     getActivity().finish();
                 }
