@@ -96,7 +96,6 @@ public class LoginActivity extends Fragment {
 
 
                     startActivity(intent);
-                    //getActivity().finish();
                 }
             });
         }
