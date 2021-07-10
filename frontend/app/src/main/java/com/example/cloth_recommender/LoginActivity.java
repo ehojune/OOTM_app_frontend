@@ -2,6 +2,7 @@ package com.example.cloth_recommender;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -72,6 +73,8 @@ public class LoginActivity extends AppCompatActivity {
 
                     intent.putExtra("name", result.getNickname());
                     intent.putExtra("profile", result.getProfileImagePath());
+                    intent.putExtra("userid", String.valueOf(result.getId()));
+                    Log.d("Kakaoid", String.valueOf(result.getId()));
 
                     if(result.getKakaoAccount().hasEmail() == OptionalBoolean.TRUE)
                         intent.putExtra("email", result.getKakaoAccount().getEmail());

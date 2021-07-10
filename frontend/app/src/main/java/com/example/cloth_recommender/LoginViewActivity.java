@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,19 +20,50 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.example.cloth_recommender.server.ApiClient;
+import com.example.cloth_recommender.server.RetrofitAPI;
+import com.example.cloth_recommender.server.UserData;
 import com.kakao.network.ApiErrorCode;
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 
+import java.util.HashMap;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class LoginViewActivity extends Fragment {
 
-    String strNickname, strProfile;
+    String strNickname;
+    String strProfile;
+    String strID;
     String strEmail, strAgeRange, strGender, strBirthday;
+
+    List<UserData> forTest;
+
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.frag3_loginview,container, false);
+
+        RetrofitAPI retrofitAPI = ApiClient.getClient().create(RetrofitAPI.class);
+        Call<List<UserData>> call = retrofitAPI.getData();
+        call.enqueue(new Callback<List<UserData>>(){
+            @Override
+            public void onResponse(Call<List<UserData>> call, Response<List<UserData>> response){
+                forTest = response.body();
+
+            }
+            @Override
+            public void onFailure(Call<List<UserData>> call, Throwable t) {
+
+
+            }
+        });
 
         TextView tvNickname = v.findViewById(R.id.tvNickname);
         ImageView ivProfile = v.findViewById(R.id.ivProfile);
@@ -46,6 +78,23 @@ public class LoginViewActivity extends Fragment {
         Intent intent = getActivity().getIntent();
         strNickname = intent.getStringExtra("name");
         strProfile = intent.getStringExtra("profile");
+        strID = intent.getStringExtra("userid");
+
+        HashMap<String,String> map = new HashMap<>();
+        map.put("username", strNickname);
+        map.put("userID", strID);
+
+        Call<Void> call2 = retrofitAPI.putNewUser(map);
+        call2.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+            }
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+            }
+        });
+
+
 
         strEmail = intent.getStringExtra("email");
         strAgeRange = intent.getStringExtra("ageRange");
@@ -114,6 +163,18 @@ public class LoginViewActivity extends Fragment {
 
                                     @Override
                                     public void onSuccess(Long result) {
+                                        HashMap<String,String> useridmap = new HashMap<>();
+                                        useridmap.put("userID", strID);
+                                        Call<Void> deleteCall = retrofitAPI.deleteUser(useridmap);
+                                        deleteCall.enqueue(new Callback<Void>() {
+                                            @Override
+                                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                            }
+                                            @Override
+                                            public void onFailure(Call<Void> call, Throwable t) {
+                                            }
+                                        });
+
                                         Toast.makeText(getActivity().getApplicationContext(), "회원탈퇴에 성공했습니다.", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(getActivity(), LoginActivity.class);
                                         startActivity(intent);
