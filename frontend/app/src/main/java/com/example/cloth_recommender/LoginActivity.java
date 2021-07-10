@@ -2,15 +2,9 @@ package com.example.cloth_recommender;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
@@ -72,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 public void onSuccess(MeV2Response result) {
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), TabActivity.class);
                     /*
                     Intent intent = new Intent(getApplicationContext(), LoginViewActivity.class);*/
 

@@ -18,7 +18,7 @@ import com.google.android.material.tabs.TabLayout;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class MainActivity extends AppCompatActivity {
+public class TabActivity extends AppCompatActivity {
 
     private static final String TAG = "Main_Activity";
     private TabLayout tabLayout;

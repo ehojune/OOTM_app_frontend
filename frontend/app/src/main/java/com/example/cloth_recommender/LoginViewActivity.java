@@ -53,7 +53,7 @@ public class LoginViewActivity extends Fragment {
         strBirthday = intent.getStringExtra("birthday");
 
         tvNickname.setText(strNickname);
-        Glide.with(this).load(strProfile).into(ivProfile);
+        Glide.with(getActivity()).load(strProfile).circleCrop().into(ivProfile);
 
         tvEmail.setText(strEmail);
         tvAgeRange.setText(strAgeRange);
