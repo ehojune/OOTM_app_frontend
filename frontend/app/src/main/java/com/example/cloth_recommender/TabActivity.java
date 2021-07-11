@@ -31,6 +31,7 @@ public class TabActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         tabLayout=findViewById(R.id.tabs);
         viewPager=findViewById(R.id.view_pager);
         adapter=new FragmentAdapter(getSupportFragmentManager(),1);
@@ -50,4 +51,5 @@ public class TabActivity extends AppCompatActivity {
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_baseline_bookmark_24);
         tabLayout.getTabAt(2).setIcon(R.drawable.ic_baseline_person_24);
     }
+
 }
