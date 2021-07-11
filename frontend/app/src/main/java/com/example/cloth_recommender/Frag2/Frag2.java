@@ -54,7 +54,7 @@ public class Frag2 extends Fragment {
             }
         });
 
-        Button btn_Newpostactivity = v.findViewById(R.id.NewPostActivity2);
+        Button btn_Newpostactivity = v.findViewById(R.id.NewPostActivity);
         btn_Newpostactivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -5,7 +5,7 @@
     android:id="@+id/myconstraintlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Frag2.Frag2">
+    tools:context=".Frag2.NewPostActivity">
 
 
     <TextView
@@ -15,7 +15,7 @@
         android:text="Add Post"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.438"
@@ -29,7 +29,6 @@
         android:layout_height="300dp"
         android:layout_marginBottom="268dp"
         android:clickable="true"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"

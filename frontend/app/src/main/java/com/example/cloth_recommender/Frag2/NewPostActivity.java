@@ -30,10 +30,13 @@ public class NewPostActivity extends AppCompatActivity {
     Uri imageUri;
     ImageView getImage;
 
+
     @Nullable
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v=inflater.inflate(R.layout.frag2_activity_newpostactivity,container,false);
-        getImage = v.findViewById(R.id.NewPostActivity2);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.frag2_activity_newpostactivity);
+        getImage = this.findViewById(R.id.NewPostActivity2);
         getImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,21 +46,9 @@ public class NewPostActivity extends AppCompatActivity {
                 intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, 200);
+                startActivityForResult(intent, 201);
             }
         });
-
-        //recyclerView = v.findViewById(R.id.recyclerView);
-
-
-        return v;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.frag2_activity_newpostactivity);
-//        getactivity.ontentView(R.layout.fragment_fragment4);
 
         // 앨범으로 이동하는 버튼
 
