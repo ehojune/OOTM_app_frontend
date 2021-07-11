@@ -114,24 +114,22 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        >
+        android:layout_gravity="center_horizontal">
+
         <Button
             android:id="@+id/btnLogout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:text="로그아웃"
-            />
+            android:text="로그아웃" />
 
         <Button
             android:id="@+id/btnSignout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:text="회원탈퇴"
             android:layout_below="@+id/btnLogout"
-            />
+            android:layout_margin="15dp"
+            android:text="회원탈퇴" />
     </RelativeLayout>
 
 

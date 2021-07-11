@@ -1,33 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity ="center"
+    android:orientation="vertical"
     tools:context=".Frag2.ViewPostActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/userimage"
+            android:layout_margin="10dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/app_logo"
+            />
+        <TextView
+            android:id="@+id/postuser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold"
+            android:text="Nickname"
+            android:layout_toRightOf="@id/userimage"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="176cm - 75kg"
+            android:layout_toRightOf="@id/userimage"
+            android:layout_below="@id/postuser"/>
 
-    <ImageView
-        android:id="@+id/image_big"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="157dp" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/userimage">
 
-    <Button
-        android:id="@+id/saveImage"
-        android:layout_width="wrap_content"
+            <ImageView
+                android:id="@+id/postimage"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="10dp"
+                android:layout_marginStart="9dp"
+                android:layout_marginEnd="9dp"
+                app:layout_constraintDimensionRatio="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="76dp"
-        android:text="↓"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.913"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:orientation="horizontal">
+        <CheckBox
+            android:id="@+id/wishBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:button="@drawable/wish_btn"
+            />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <ImageButton
+            android:id="@+id/saveImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/download_btn"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="10dp"
+            android:background="@null"
+            />
+        <CheckBox
+            android:id="@+id/bookmarkbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/download_btn"
+            android:button="@drawable/bookmark_btn"
+            android:gravity="center"
+
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:background="@null"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_delete_outline_24"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:background="@null"/>
+
+    </LinearLayout>
+
+
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,23 +111,49 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
-
-
-
         <TextView
+            android:layout_marginLeft="10dp"
             android:id="@+id/comment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="정보 출력"
             android:textSize="15sp"
-            android:text="정보 출력"
+            android:text="21.05.01 (임의의 날짜)"
             android:layout_weight="1"/>
-
-
-
-
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="|"/>
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="옷 장르"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="착용 제품 확인하기"/>
+        <ImageButton
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/clothicon"
+            android:background="@null"
+            />
     </LinearLayout>
 
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

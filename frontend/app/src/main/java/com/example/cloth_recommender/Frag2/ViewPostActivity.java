@@ -14,6 +14,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
@@ -31,7 +32,7 @@ public class ViewPostActivity extends Activity {
 
     private ImageView img;
     private EditText cmt;
-    private Button btn;
+    private ImageButton btn;
     private static final String TAG = "ViewPostActivity";
     private String mCurrentPhotoPath;
 
@@ -55,7 +56,7 @@ public class ViewPostActivity extends Activity {
 
         popUp = new PopupWindow(this);
 
-        img = findViewById(R.id.image_big);
+        img = findViewById(R.id.postimage);
         //cmt = findViewById(R.id.comment);
         btn = findViewById(R.id.saveImage);
 
