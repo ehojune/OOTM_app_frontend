@@ -1,10 +1,7 @@
 package com.example.cloth_recommender.Frag2;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +10,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -29,6 +28,8 @@ public class NewPostActivity extends AppCompatActivity {
     //MultiImageAdapter adapter;  // 리사이클러뷰에 적용시킬 어댑터
     Uri imageUri;
     ImageView getImage;
+    private ImageButton btn_back;
+    private EditText cmt;
 
 
     @Nullable
@@ -36,7 +37,8 @@ public class NewPostActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.frag2_activity_newpostactivity);
-        getImage = this.findViewById(R.id.NewPostActivity2);
+        cmt = findViewById(R.id.comment);
+        getImage = this.findViewById(R.id.Uploadimg1);
         getImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,6 +51,15 @@ public class NewPostActivity extends AppCompatActivity {
                 startActivityForResult(intent, 201);
             }
         });
+
+        btn_back = this.findViewById(R.id.Back);
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
 
         // 앨범으로 이동하는 버튼
 
