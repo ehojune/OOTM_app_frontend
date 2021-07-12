@@ -85,14 +85,16 @@ public class ViewPostActivity extends Activity {
                 postinfo = response.body();
                 //Log.d("postinfo1", String.valueOf(postinfo.userName));
                 Log.d("postinfo1", postinfo.userID);
+                img.setImageResource(R.drawable.app_logo);
+                postuser.setText(postinfo.userName);
+                userbody.setText( postinfo.userBody.height +"cm - " + postinfo.userBody.weight+ "kg");
+                genre.setText(postinfo.postgenre);
             }
             @Override
             public void onFailure(Call<postInfo> call, Throwable t) {
                 Log.d("postinfo1", "fail");
             }
         });
-        img.setImageResource(R.drawable.app_logo);
-
         /*
         db = AppDataBase_gallery.getInstance(this);
         List<User_gallery> user_galleryList = db.userDao().getAll();

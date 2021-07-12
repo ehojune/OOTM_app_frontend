@@ -204,7 +204,7 @@ public class NewPostActivity extends AppCompatActivity {
                 postmap.put("sho", ShoeInfo);
                 postmap.put("out", OuterInfo);
                 postmap.put("acc", AccInfo);
-                postmap.put("genrearray", Genre.substring(0, Genre.length()-1));
+                postmap.put("postgenre", Genre.substring(0, Genre.length()-1));
                 Log.d("GenreArray", Genre.substring(0, Genre.length()-1));
                 Call<Void> calladdpost = retrofitAPI.addPost(postmap);
                 calladdpost.enqueue(new Callback<Void>() {
