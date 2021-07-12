@@ -85,22 +85,6 @@ public class NewPostActivity extends AppCompatActivity {
 
 
 
-        HeightInput = findViewById(R.id.HeightInfo);
-        String HeightInfo = HeightInput.getText().toString();
-        WeightInput = findViewById(R.id.WeightInfo);
-        String WeightInfo = WeightInput.getText().toString();
-        OuterInput = findViewById(R.id.OuterInfo);
-        String OuterInfo = OuterInput.getText().toString();
-        TopInput = findViewById(R.id.TopInfo);
-        String TopInfo = TopInput.getText().toString();
-        BottomInput = findViewById(R.id.BottomInfo);
-        String BottomInfo = BottomInput.getText().toString();
-        AccInput = findViewById(R.id.AccInfo);
-        String AccInfo = AccInput.getText().toString();
-        ShoeInput = findViewById(R.id.ShoeInfo);
-        String ShoeInfo = ShoeInput.getText().toString();
-
-
 
 
         getImage = this.findViewById(R.id.Uploadimg1);
@@ -131,6 +115,23 @@ public class NewPostActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                HeightInput = findViewById(R.id.HeightInfo);
+                String HeightInfo = HeightInput.getText().toString();
+                Log.d("Input", HeightInfo);
+                WeightInput = findViewById(R.id.WeightInfo);
+                String WeightInfo = WeightInput.getText().toString();
+                OuterInput = findViewById(R.id.OuterInfo);
+                String OuterInfo = OuterInput.getText().toString();
+                Log.d("Input", OuterInfo);
+                TopInput = findViewById(R.id.TopInfo);
+                String TopInfo = TopInput.getText().toString();
+                BottomInput = findViewById(R.id.BottomInfo);
+                String BottomInfo = BottomInput.getText().toString();
+                AccInput = findViewById(R.id.AccInfo);
+                String AccInfo = AccInput.getText().toString();
+                ShoeInput = findViewById(R.id.ShoeInfo);
+                String ShoeInfo = ShoeInput.getText().toString();
+
                 //postDB에 정보추가
                 HashMap<String,String> postmap = new HashMap<>();
                 postmap.put("userName", userinfo.userName);
@@ -152,6 +153,8 @@ public class NewPostActivity extends AppCompatActivity {
                     public void onFailure(Call<Void> call, Throwable t) {
                     }
                 });
+                finish();
+
             }
         });
 
