@@ -16,15 +16,29 @@
         android:background="@null"
         android:src="@drawable/ic_baseline_arrow_back_24" />
 
-    <TextView
-        android:id="@+id/textView0"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:text="당신의 코디"
-        android:textSize="27sp"
-        android:textStyle="bold"
-        android:visibility="visible" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:text="당신의 코디"
+            android:textSize="27sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/savepost_button"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="70dp"
+            android:text="SAVE" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,8 +48,8 @@
 
         <ImageView
             android:id="@+id/Uploadimg1"
-            android:layout_width="125dp"
-            android:layout_height="125dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_weight="1"
             android:clickable="true"
             app:srcCompat="@drawable/app_logo" />
@@ -55,6 +69,40 @@
             android:layout_weight="1"
             android:clickable="true"
             app:srcCompat="@drawable/app_logo" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/HeightInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="제 키는" />
+
+        <TextView
+            android:id="@+id/cm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="cm" />
+
+        <EditText
+            android:id="@+id/WeightInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="제 몸무게는" />
+
+        <TextView
+            android:id="@+id/kg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="kg" />
     </LinearLayout>
 
     <TextView
@@ -83,7 +131,7 @@
             android:textSize="19sp" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName1"
+            android:id="@+id/OuterInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="5"
@@ -116,7 +164,7 @@
             android:textSize="19sp" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName2"
+            android:id="@+id/TopInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="5"
@@ -151,7 +199,7 @@
             android:textSize="19sp" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName3"
+            android:id="@+id/BottomInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="5"
@@ -184,7 +232,7 @@
             android:textSize="19sp" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName4"
+            android:id="@+id/AccInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="5"
@@ -217,7 +265,7 @@
             android:textSize="19sp" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName5"
+            android:id="@+id/ShoeInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="5"
@@ -300,13 +348,6 @@
             android:visibility="invisible"/>
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/savepost_button"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="150dp"
-        android:text="SAVE" />
 
 
 </LinearLayout>

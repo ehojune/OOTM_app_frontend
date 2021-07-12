@@ -2,6 +2,7 @@ package com.example.cloth_recommender.Frag2;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -38,9 +39,20 @@ public class NewPostActivity extends AppCompatActivity {
     Uri imageUri;
     ImageView getImage;
     private ImageButton btn_back;
-    private EditText cmt;
     UserData userinfo;
     Button saveButton;
+
+    private EditText HeightInput;
+    private EditText WeightInput;
+    private EditText TopInput;
+    private EditText BottomInput;
+    private EditText ShoeInput;
+    private EditText OuterInput;
+    private EditText AccInput;
+
+
+
+
 
     @Nullable
     @Override
@@ -70,6 +82,26 @@ public class NewPostActivity extends AppCompatActivity {
                 Log.d("userinfo", "fail");
             }
         });
+
+
+
+        HeightInput = findViewById(R.id.HeightInfo);
+        String HeightInfo = HeightInput.getText().toString();
+        WeightInput = findViewById(R.id.WeightInfo);
+        String WeightInfo = WeightInput.getText().toString();
+        OuterInput = findViewById(R.id.OuterInfo);
+        String OuterInfo = OuterInput.getText().toString();
+        TopInput = findViewById(R.id.TopInfo);
+        String TopInfo = TopInput.getText().toString();
+        BottomInput = findViewById(R.id.BottomInfo);
+        String BottomInfo = BottomInput.getText().toString();
+        AccInput = findViewById(R.id.AccInfo);
+        String AccInfo = AccInput.getText().toString();
+        ShoeInput = findViewById(R.id.ShoeInfo);
+        String ShoeInfo = ShoeInput.getText().toString();
+
+
+
 
         getImage = this.findViewById(R.id.Uploadimg1);
         getImage.setOnClickListener(new View.OnClickListener() {
@@ -103,13 +135,13 @@ public class NewPostActivity extends AppCompatActivity {
                 HashMap<String,String> postmap = new HashMap<>();
                 postmap.put("userName", userinfo.userName);
                 postmap.put("userID", strID);
-                postmap.put("height", "키");
-                postmap.put("weight", "몸무게");
-                postmap.put("top", "상의");
-                postmap.put("bot", "하의");
-                postmap.put("sho", "신발");
-                postmap.put("out", "아우터");
-                postmap.put("acc", "악세");
+                postmap.put("height", HeightInfo);
+                postmap.put("weight", WeightInfo);
+                postmap.put("top", TopInfo);
+                postmap.put("bot", BottomInfo);
+                postmap.put("sho", ShoeInfo);
+                postmap.put("out", OuterInfo);
+                postmap.put("acc", AccInfo);
                 postmap.put("genrearray", "genre들의 string array");
                 Call<Void> calladdpost = retrofitAPI.addPost(postmap);
                 calladdpost.enqueue(new Callback<Void>() {
