@@ -37,7 +37,6 @@ public class NewPostActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.frag2_activity_newpostactivity);
-        cmt = findViewById(R.id.comment);
         getImage = this.findViewById(R.id.Uploadimg1);
         getImage.setOnClickListener(new View.OnClickListener() {
             @Override
