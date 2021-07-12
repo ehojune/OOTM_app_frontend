@@ -11,20 +11,34 @@
 
     <ImageButton
         android:id="@+id/Back"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:background="@null"
         android:src="@drawable/ic_baseline_arrow_back_24" />
 
-    <TextView
-        android:id="@+id/textView0"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:text="당신의 코디"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:visibility="visible" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:text="당신의 코디"
+            android:textSize="27sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/savepost_button"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="70dp"
+            android:text="SAVE" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,8 +48,8 @@
 
         <ImageView
             android:id="@+id/Uploadimg1"
-            android:layout_width="125dp"
-            android:layout_height="125dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_weight="1"
             android:clickable="true"
             app:srcCompat="@drawable/app_logo" />
@@ -57,6 +71,40 @@
             app:srcCompat="@drawable/app_logo" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/HeightInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="제 키는" />
+
+        <TextView
+            android:id="@+id/cm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="cm" />
+
+        <EditText
+            android:id="@+id/WeightInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="제 몸무게는" />
+
+        <TextView
+            android:id="@+id/kg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="kg" />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -64,7 +112,7 @@
         android:layout_marginLeft="40dp"
         android:layout_marginTop="10dp"
         android:text="착용 아이템"
-        android:textSize="30sp"
+        android:textSize="27sp"
         android:textStyle="bold"
         android:visibility="visible" />
 
@@ -75,7 +123,7 @@
 
         <TextView
             android:id="@+id/textView1"
-            android:layout_width="125dp"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_weight="2"
@@ -83,7 +131,7 @@
             android:textSize="19sp" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName1"
+            android:id="@+id/OuterInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="5"
@@ -94,7 +142,7 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:text="TextView"
             android:textSize="19sp"
@@ -108,7 +156,7 @@
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="125dp"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_weight="2"
@@ -116,7 +164,7 @@
             android:textSize="19sp" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName2"
+            android:id="@+id/TopInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="5"
@@ -127,7 +175,7 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:text="TextView"
             android:textSize="19sp"
@@ -143,7 +191,7 @@
 
         <TextView
             android:id="@+id/textView5"
-            android:layout_width="125dp"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_weight="2"
@@ -151,7 +199,7 @@
             android:textSize="19sp" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName3"
+            android:id="@+id/BottomInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="5"
@@ -162,7 +210,7 @@
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:text="TextView"
             android:textSize="19sp"
@@ -176,7 +224,7 @@
 
         <TextView
             android:id="@+id/textView7"
-            android:layout_width="125dp"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_weight="2"
@@ -184,7 +232,7 @@
             android:textSize="19sp" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName4"
+            android:id="@+id/AccInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="5"
@@ -195,7 +243,7 @@
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:text="TextView"
             android:textSize="19sp"
@@ -209,7 +257,7 @@
 
         <TextView
             android:id="@+id/textView9"
-            android:layout_width="125dp"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_weight="2"
@@ -217,7 +265,7 @@
             android:textSize="19sp" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName5"
+            android:id="@+id/ShoeInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="5"
@@ -228,7 +276,7 @@
             android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:text="TextView"
             android:textSize="19sp"
@@ -300,13 +348,6 @@
             android:visibility="invisible"/>
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/savepost_button"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="150dp"
-        android:text="SAVE" />
 
 
 </LinearLayout>
