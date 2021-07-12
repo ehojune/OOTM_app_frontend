@@ -58,7 +58,11 @@ public class Frag2 extends Fragment {
         btn_Newpostactivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(v.getContext(), NewPostActivity.class));
+                Intent intentnewpost = new Intent(v.getContext(), NewPostActivity.class);
+                Intent intent = getActivity().getIntent();
+                String strID = intent.getStringExtra("userid");
+                intentnewpost.putExtra("userid", strID);
+                startActivity(intentnewpost);
             }
         });
 

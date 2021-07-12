@@ -6,26 +6,15 @@ import java.util.List;
 
 public class UserData {
 
-    @SerializedName("username")
-    public String username;
-    @SerializedName("email")
-    public String email;
-    @SerializedName("ageRange")
-    public String ageRange;
-    @SerializedName("gender")
-    public String gender;
-    @SerializedName("birthday")
-    public String birthday;
+    @SerializedName("userName")
+    public String userName;
+    @SerializedName("userID")
+    public String userID;
     @SerializedName("postArray")
     public List<postData> postArray;
 
-    /**
-    @Override
-    public String toString() {
-        return
-    }*/
 }
 class postData {
-    @SerializedName("id")
-    private int id;
+    @SerializedName("postID")
+    private int postID;
 }
