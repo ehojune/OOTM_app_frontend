@@ -149,22 +149,20 @@ public class NewPostActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 HeightInput = findViewById(R.id.HeightInfo);
-                String HeightInfo = HeightInput.getText().toString();
-                Log.d("Input", HeightInfo);
                 WeightInput = findViewById(R.id.WeightInfo);
-                String WeightInfo = WeightInput.getText().toString();
                 OuterInput = findViewById(R.id.OuterInfo);
-                String OuterInfo = OuterInput.getText().toString();
-                Log.d("Input", OuterInfo);
                 TopInput = findViewById(R.id.TopInfo);
-                String TopInfo = TopInput.getText().toString();
                 BottomInput = findViewById(R.id.BottomInfo);
-                String BottomInfo = BottomInput.getText().toString();
                 AccInput = findViewById(R.id.AccInfo);
-                String AccInfo = AccInput.getText().toString();
                 ShoeInput = findViewById(R.id.ShoeInfo);
-                String ShoeInfo = ShoeInput.getText().toString();
 
+                String HeightInfo = HeightInput.getText().toString();
+                String WeightInfo = WeightInput.getText().toString();
+                String OuterInfo = OuterInput.getText().toString();
+                String TopInfo = TopInput.getText().toString();
+                String BottomInfo = BottomInput.getText().toString();
+                String AccInfo = AccInput.getText().toString();
+                String ShoeInfo = ShoeInput.getText().toString();
                 ArrayList<String> GenreArray = new ArrayList<>();
                 Minimal = findViewById(R.id.Minimal);
                 if (((CheckBox) Minimal).isChecked()){
@@ -192,6 +190,35 @@ public class NewPostActivity extends AppCompatActivity {
                     Genre += s + "_";
                 }
 
+                if(OuterInfo.length() * TopInfo.length() * BottomInfo.length() * AccInfo.length() * ShoeInfo.length() * Genre.length()== 0){
+                    Toast.makeText(getApplicationContext(),"미입력된 정보가 있습니다.", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    HashMap<String,String> postmap = new HashMap<>();
+                    postmap.put("userName", userinfo.userName);
+                    postmap.put("userID", strID);
+                    postmap.put("height", HeightInfo);
+                    postmap.put("weight", WeightInfo);
+                    postmap.put("top", TopInfo);
+                    postmap.put("bot", BottomInfo);
+                    postmap.put("sho", ShoeInfo);
+                    postmap.put("out", OuterInfo);
+                    postmap.put("acc", AccInfo);
+                    postmap.put("genrearray", Genre.substring(0, Genre.length()-1));
+                    Log.d("GenreArray", Genre.substring(0, Genre.length()-1));
+                    Call<Void> calladdpost = retrofitAPI.addPost(postmap);
+                    calladdpost.enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                        }
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                        }
+                    });
+                    finish();
+                }
+
+
 
                 //postDB에 정보추가
                 HashMap<String,String> postmap = new HashMap<>();
@@ -216,7 +243,6 @@ public class NewPostActivity extends AppCompatActivity {
                     }
                 });
                 finish();
-
             }
         });
 
