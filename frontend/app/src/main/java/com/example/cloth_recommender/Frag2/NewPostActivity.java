@@ -50,6 +50,14 @@ public class NewPostActivity extends AppCompatActivity {
     private EditText OuterInput;
     private EditText AccInput;
 
+    String HeightInfo;
+    String WeightInfo;
+    String TopInfo;
+    String BottomInfo;
+    String ShoeInfo;
+    String OuterInfo;
+    String AccInfo;
+
 
 
 
@@ -85,20 +93,7 @@ public class NewPostActivity extends AppCompatActivity {
 
 
 
-        HeightInput = findViewById(R.id.HeightInfo);
-        String HeightInfo = HeightInput.getText().toString();
-        WeightInput = findViewById(R.id.WeightInfo);
-        String WeightInfo = WeightInput.getText().toString();
-        OuterInput = findViewById(R.id.OuterInfo);
-        String OuterInfo = OuterInput.getText().toString();
-        TopInput = findViewById(R.id.TopInfo);
-        String TopInfo = TopInput.getText().toString();
-        BottomInput = findViewById(R.id.BottomInfo);
-        String BottomInfo = BottomInput.getText().toString();
-        AccInput = findViewById(R.id.AccInfo);
-        String AccInfo = AccInput.getText().toString();
-        ShoeInput = findViewById(R.id.ShoeInfo);
-        String ShoeInfo = ShoeInput.getText().toString();
+
 
 
 
@@ -130,6 +125,20 @@ public class NewPostActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                HeightInput = findViewById(R.id.HeightInfo);
+                HeightInfo = HeightInput.getText().toString();
+                WeightInput = findViewById(R.id.WeightInfo);
+                WeightInfo = WeightInput.getText().toString();
+                OuterInput = findViewById(R.id.OuterInfo);
+                OuterInfo = OuterInput.getText().toString();
+                TopInput = findViewById(R.id.TopInfo);
+                TopInfo = TopInput.getText().toString();
+                BottomInput = findViewById(R.id.BottomInfo);
+                BottomInfo = BottomInput.getText().toString();
+                AccInput = findViewById(R.id.AccInfo);
+                AccInfo = AccInput.getText().toString();
+                ShoeInput = findViewById(R.id.ShoeInfo);
+                ShoeInfo = ShoeInput.getText().toString();
 
                 //postDB에 정보추가
                 HashMap<String,String> postmap = new HashMap<>();
