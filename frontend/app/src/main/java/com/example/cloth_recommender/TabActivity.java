@@ -1,22 +1,14 @@
 package com.example.cloth_recommender;
 
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.os.Bundle;
-import android.util.Base64;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.cloth_recommender.Frag1.Frag1;
 import com.example.cloth_recommender.Frag2.Frag2;
-import com.example.cloth_recommender.Frag3.Frag3;
+import com.example.cloth_recommender.Frag3.LoginViewActivity;
 import com.google.android.material.tabs.TabLayout;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 public class TabActivity extends AppCompatActivity {
 

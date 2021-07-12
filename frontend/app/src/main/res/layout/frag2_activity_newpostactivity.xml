@@ -302,7 +302,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/savepost_button"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginLeft="150dp"

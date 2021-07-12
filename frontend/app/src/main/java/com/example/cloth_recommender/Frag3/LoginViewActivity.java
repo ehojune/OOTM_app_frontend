@@ -1,4 +1,4 @@
-package com.example.cloth_recommender;
+package com.example.cloth_recommender.Frag3;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -20,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.example.cloth_recommender.LoginActivity;
+import com.example.cloth_recommender.R;
 import com.example.cloth_recommender.server.ApiClient;
 import com.example.cloth_recommender.server.RetrofitAPI;
 import com.example.cloth_recommender.server.UserData;
@@ -56,7 +58,7 @@ public class LoginViewActivity extends Fragment {
             @Override
             public void onResponse(Call<List<UserData>> call, Response<List<UserData>> response){
                 forTest = response.body();
-
+                //Log.d("fortest", String.valueOf(forTest.get(0)));
             }
             @Override
             public void onFailure(Call<List<UserData>> call, Throwable t) {

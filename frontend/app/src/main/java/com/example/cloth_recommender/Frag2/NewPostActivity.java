@@ -5,19 +5,28 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import com.example.cloth_recommender.R;
+import com.example.cloth_recommender.server.ApiClient;
+import com.example.cloth_recommender.server.RetrofitAPI;
+import com.example.cloth_recommender.server.UserData;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class NewPostActivity extends AppCompatActivity {
 
@@ -30,13 +39,38 @@ public class NewPostActivity extends AppCompatActivity {
     ImageView getImage;
     private ImageButton btn_back;
     private EditText cmt;
-
+    UserData userinfo;
+    Button saveButton;
 
     @Nullable
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.frag2_activity_newpostactivity);
+
+        //retrofit api creation
+        RetrofitAPI retrofitAPI = ApiClient.getClient().create(RetrofitAPI.class);
+
+        //post할 때 user 정보
+        Intent intentfrag2 = getIntent();
+        String strID = intentfrag2.getStringExtra("userid");
+        Log.d("strID", strID);
+
+        Call<UserData> calluser = retrofitAPI.getUser(strID);
+
+        calluser.enqueue(new Callback<UserData>() {
+            @Override
+            public void onResponse(Call<UserData> call, Response<UserData> response) {
+                userinfo = response.body();
+                Log.d("userinfo", String.valueOf(userinfo.userName));
+            }
+
+            @Override
+            public void onFailure(Call<UserData> call, Throwable t) {
+                Log.d("userinfo", "fail");
+            }
+        });
+
         getImage = this.findViewById(R.id.Uploadimg1);
         getImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,9 +92,36 @@ public class NewPostActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-
         // 앨범으로 이동하는 버튼
+
+        saveButton = this.findViewById(R.id.savepost_button);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //postDB에 정보추가
+                HashMap<String,String> postmap = new HashMap<>();
+                postmap.put("userName", userinfo.userName);
+                postmap.put("userID", strID);
+                postmap.put("height", "키");
+                postmap.put("weight", "몸무게");
+                postmap.put("top", "상의");
+                postmap.put("bot", "하의");
+                postmap.put("sho", "신발");
+                postmap.put("out", "아우터");
+                postmap.put("acc", "악세");
+                postmap.put("genrearray", "genre들의 string array");
+                Call<Void> calladdpost = retrofitAPI.addPost(postmap);
+                calladdpost.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                    }
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                    }
+                });
+            }
+        });
 
 
     }
