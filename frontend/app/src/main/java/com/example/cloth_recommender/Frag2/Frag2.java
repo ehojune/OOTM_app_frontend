@@ -28,6 +28,7 @@ import com.example.cloth_recommender.R;
 import com.example.cloth_recommender.server.ApiClient;
 import com.example.cloth_recommender.server.RetrofitAPI;
 import com.example.cloth_recommender.server.UserData;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -52,22 +53,7 @@ public class Frag2 extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.frag2,container,false);
-
-
-        Button btn_getImage = v.findViewById(R.id.getImage);
-        btn_getImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
-                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, 200);
-            }
-        });
-
-        Button btn_Newpostactivity = v.findViewById(R.id.NewPostActivity);
+        FloatingActionButton btn_Newpostactivity = v.findViewById(R.id.NewPostActivity);
         btn_Newpostactivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,14 +101,13 @@ public class Frag2 extends Fragment {
 
 
     }
-
+/*
     @Override
-
-
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.e("single choice: ", String.valueOf(data.getData()));
         Uri imageUri = data.getData();
         uriList.add(imageUri);
     }
+*/
 }
