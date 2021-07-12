@@ -107,6 +107,7 @@ public class NewPostActivity extends AppCompatActivity {
             }
         });
 
+
         getImage2 = this.findViewById(R.id.Uploadimg2);
         getImage2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,8 +133,6 @@ public class NewPostActivity extends AppCompatActivity {
                 startActivityForResult(intent3, 203);
             }
         });
-
-
 
 
         btn_back = this.findViewById(R.id.Back);

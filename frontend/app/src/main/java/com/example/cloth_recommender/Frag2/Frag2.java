@@ -19,14 +19,25 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.example.cloth_recommender.R;
+import com.example.cloth_recommender.server.ApiClient;
+import com.example.cloth_recommender.server.RetrofitAPI;
+import com.example.cloth_recommender.server.UserData;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Frag2 extends Fragment {
 
     private static final String TAG = "MultiImageActivity";
     ArrayList<Uri> uriList = new ArrayList<>();     // 이미지의 uri를 담을 ArrayList 객체
+    ArrayList<String> postIDList = new ArrayList<>();
 
     RecyclerView recyclerView;  // 이미지를 보여줄 리사이클러뷰
     MultiImageAdapter adapter;  // 리사이클러뷰에 적용시킬 어댑터
@@ -41,6 +52,8 @@ public class Frag2 extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.frag2,container,false);
+
+
         Button btn_getImage = v.findViewById(R.id.getImage);
         btn_getImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,10 +79,26 @@ public class Frag2 extends Fragment {
             }
         });
 
+        //retrofit api creation
+        RetrofitAPI retrofitAPI = ApiClient.getClient().create(RetrofitAPI.class);
+        Call<List<String>> callpostIDs = retrofitAPI.getPostID();
+        callpostIDs.enqueue(new Callback<List<String>>() {
+            @Override
+            public void onResponse(Call<List<String>> call, Response<List<String>> response) {
+                postIDList = (ArrayList<String>) response.body();
+                Log.d("postidlist", String.valueOf(postIDList.size()));
+            }
 
-
+            @Override
+            public void onFailure(Call<List<String>> call, Throwable t) {
+            }
+        });
         recyclerView = v.findViewById(R.id.recyclerView);
-
+        adapter = new MultiImageAdapter(postIDList, getActivity().getApplicationContext());
+        recyclerView.setAdapter(adapter);
+        //recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
+        recyclerView.setLayoutManager(gridLayoutManager);
 
         return v;
     }
@@ -77,8 +106,6 @@ public class Frag2 extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        getActivity().setContentView(R.layout.fragment_fragment4);
-//        setContentView(R.layout.fragment_fragment4);
 
         // 앨범으로 이동하는 버튼
 
@@ -90,49 +117,8 @@ public class Frag2 extends Fragment {
 
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if(data == null){   // 어떤 이미지도 선택하지 않은 경우
-            Toast.makeText(getActivity().getApplicationContext(), "이미지를 선택하지 않았습니다.", Toast.LENGTH_LONG).show();
-        }
-        else{   // 이미지를 하나라도 선택한 경우
-            if(data.getClipData() == null){     // 이미지를 하나만 선택한 경우
-                Log.e("single choice: ", String.valueOf(data.getData()));
-                Uri imageUri = data.getData();
-                uriList.add(imageUri);
-
-                adapter = new MultiImageAdapter(uriList, getActivity().getApplicationContext());
-                recyclerView.setAdapter(adapter);
-                //recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
-                GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
-                recyclerView.setLayoutManager(gridLayoutManager);
-            }
-            else{      // 이미지를 여러장 선택한 경우
-                ClipData clipData = data.getClipData();
-                Log.e("clipData", String.valueOf(clipData.getItemCount()));
-
-                if(clipData.getItemCount() > 20){   // 선택한 이미지가 21장 이상인 경우
-                    Toast.makeText(getActivity().getApplicationContext(), "사진은 20장까지 선택 가능합니다.", Toast.LENGTH_LONG).show();
-                }
-                else{   // 선택한 이미지가 1장 이상 20장 이하인 경우
-                    Log.e(TAG, "multiple choice");
-
-                    for (int i = 0; i < clipData.getItemCount(); i++){
-                        Uri imageUri = clipData.getItemAt(i).getUri();  // 선택한 이미지들의 uri를 가져온다.
-                        try {
-                            uriList.add(imageUri);  //uri를 list에 담는다.
-
-                        } catch (Exception e) {
-                            Log.e(TAG, "File select error", e);
-                        }
-                    }
-
-                    adapter = new MultiImageAdapter(uriList, getActivity().getApplicationContext());
-                    recyclerView    .setAdapter(adapter);   // 리사이클러뷰에 어댑터 세팅
-                    //recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));     // 리사이클러뷰 수평 스크롤 적용
-                    GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
-                    recyclerView.setLayoutManager(gridLayoutManager);
-                }
-            }
-        }
+        Log.e("single choice: ", String.valueOf(data.getData()));
+        Uri imageUri = data.getData();
+        uriList.add(imageUri);
     }
 }
