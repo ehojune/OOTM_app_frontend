@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -38,6 +39,8 @@ public class NewPostActivity extends AppCompatActivity {
     //MultiImageAdapter adapter;  // 리사이클러뷰에 적용시킬 어댑터
     Uri imageUri;
     ImageView getImage;
+    ImageView getImage2;
+    ImageView getImage3;
     private ImageButton btn_back;
     UserData userinfo;
     Button saveButton;
@@ -50,7 +53,11 @@ public class NewPostActivity extends AppCompatActivity {
     private EditText OuterInput;
     private EditText AccInput;
 
-
+    private CheckBox Minimal;
+    private CheckBox Casual;
+    private CheckBox Street;
+    private CheckBox Amekaji;
+    private CheckBox Cityboy;
 
 
 
@@ -91,7 +98,6 @@ public class NewPostActivity extends AppCompatActivity {
         getImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(NewPostActivity.this, "rr", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
                 intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
@@ -101,6 +107,32 @@ public class NewPostActivity extends AppCompatActivity {
             }
         });
 
+
+        getImage2 = this.findViewById(R.id.Uploadimg2);
+        getImage2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent(Intent.ACTION_PICK);
+                intent2.setType(MediaStore.Images.Media.CONTENT_TYPE);
+                intent2.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                intent2.setAction(Intent.ACTION_GET_CONTENT);
+                intent2.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent2, 202);
+            }
+        });
+
+        getImage3 = this.findViewById(R.id.Uploadimg3);
+        getImage3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent3 = new Intent(Intent.ACTION_PICK);
+                intent3.setType(MediaStore.Images.Media.CONTENT_TYPE);
+                intent3.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                intent3.setAction(Intent.ACTION_GET_CONTENT);
+                intent3.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent3, 203);
+            }
+        });
 
 
         btn_back = this.findViewById(R.id.Back);
@@ -116,7 +148,6 @@ public class NewPostActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 HeightInput = findViewById(R.id.HeightInfo);
                 String HeightInfo = HeightInput.getText().toString();
                 Log.d("Input", HeightInfo);
@@ -134,6 +165,34 @@ public class NewPostActivity extends AppCompatActivity {
                 ShoeInput = findViewById(R.id.ShoeInfo);
                 String ShoeInfo = ShoeInput.getText().toString();
 
+                ArrayList<String> GenreArray = new ArrayList<>();
+                Minimal = findViewById(R.id.Minimal);
+                if (((CheckBox) Minimal).isChecked()){
+                    GenreArray.add("Minimal");
+                }
+                Casual = findViewById(R.id.Casual);
+                if (((CheckBox) Casual).isChecked()){
+                    GenreArray.add("Casual");
+                }
+                Street = findViewById(R.id.Street);
+                if (((CheckBox) Casual).isChecked()){
+                    GenreArray.add("Street");
+                }
+                Amekaji = findViewById(R.id.Amekaji);
+                if (((CheckBox) Amekaji).isChecked()){
+                    GenreArray.add("Amekaji");
+                }
+                Cityboy = findViewById(R.id.Cityboy);
+                if (((CheckBox) Cityboy).isChecked()){
+                    GenreArray.add("Cityboy");
+                }
+                String Genre = "";
+                for (String s : GenreArray)
+                {
+                    Genre += s + "_";
+                }
+
+
                 //postDB에 정보추가
                 HashMap<String,String> postmap = new HashMap<>();
                 postmap.put("userName", userinfo.userName);
@@ -145,7 +204,8 @@ public class NewPostActivity extends AppCompatActivity {
                 postmap.put("sho", ShoeInfo);
                 postmap.put("out", OuterInfo);
                 postmap.put("acc", AccInfo);
-                postmap.put("genrearray", "genre들의 string array");
+                postmap.put("genrearray", Genre.substring(0, Genre.length()-1));
+                Log.d("GenreArray", Genre.substring(0, Genre.length()-1));
                 Call<Void> calladdpost = retrofitAPI.addPost(postmap);
                 calladdpost.enqueue(new Callback<Void>() {
                     @Override
@@ -164,10 +224,8 @@ public class NewPostActivity extends AppCompatActivity {
     }
 
     @Override
-
-
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(201, resultCode, data);
 
         if(data == null){   // 어떤 이미지도 선택하지 않은 경우
             Toast.makeText(getApplicationContext(), "이미지를 선택하지 않았습니다.", Toast.LENGTH_LONG).show();
@@ -218,4 +276,38 @@ public class NewPostActivity extends AppCompatActivity {
 
         }
     }
+/*
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(data == null){   // 어떤 이미지도 선택하지 않은 경우
+            Toast.makeText(getApplicationContext(), "이미지를 선택하지 않았습니다.", Toast.LENGTH_LONG).show();
+        }
+        else{   // 이미지를 하나라도 선택한 경우
+            if(data.getClipData() == null){     // 이미지를 하나만 선택한 경우
+                Log.e("single choice: ", String.valueOf(data.getData()));
+                imageUri = data.getData();
+                getImage.setImageURI(imageUri);
+            }
+        }
+    }
+
+
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(202, resultCode, data);
+
+        if(data == null){   // 어떤 이미지도 선택하지 않은 경우
+            Toast.makeText(getApplicationContext(), "이미지를 선택하지 않았습니다.", Toast.LENGTH_LONG).show();
+        }
+        else{
+            if(data.getClipData() == null){     // 이미지를 하나만 선택한 경우
+                Log.e("single choice: ", String.valueOf(data.getData()));
+                imageUri = data.getData();
+                getImage.setImageURI(imageUri);
+            }
+        }
+    }
+ */
 }
+
+

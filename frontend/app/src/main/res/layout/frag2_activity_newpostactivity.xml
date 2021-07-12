@@ -9,12 +9,30 @@
     tools:context=".Frag2.NewPostActivity">
 
 
-    <ImageButton
-        android:id="@+id/Back"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@null"
-        android:src="@drawable/ic_baseline_arrow_back_24" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/Back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:src="@drawable/ic_baseline_arrow_back_24" />
+
+        <Button
+            android:id="@+id/savepost_button"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="230dp"
+            android:background="@null"
+            android:backgroundTint="@null"
+            android:backgroundTintMode="@null"
+            android:text="완료"
+            android:textColor="#91000000"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -25,31 +43,24 @@
             android:id="@+id/textView0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="35dp"
             android:text="당신의 코디"
-            android:textSize="27sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             android:visibility="visible" />
-
-        <Button
-            android:id="@+id/savepost_button"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="70dp"
-            android:text="SAVE" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/Uploadimg1"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
             android:layout_weight="1"
             android:clickable="true"
             app:srcCompat="@drawable/app_logo" />
@@ -78,10 +89,9 @@
 
         <EditText
             android:id="@+id/HeightInfo"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="제 키는" />
+            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/cm"
@@ -92,10 +102,9 @@
 
         <EditText
             android:id="@+id/WeightInfo"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="제 몸무게는" />
+            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/kg"
@@ -112,7 +121,7 @@
         android:layout_marginLeft="40dp"
         android:layout_marginTop="10dp"
         android:text="착용 아이템"
-        android:textSize="27sp"
+        android:textSize="25sp"
         android:textStyle="bold"
         android:visibility="visible" />
 
@@ -286,20 +295,20 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
         android:orientation="horizontal">
 
 
         <CheckBox
-            android:id="@+id/button"
+            android:id="@+id/Minimal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="미니멀    " />
 
         <CheckBox
-            android:id="@+id/button2"
+            android:id="@+id/Casual"
             android:layout_width="wrap_content"
             android:layout_height="38dp"
             android:layout_marginLeft="20dp"
@@ -307,7 +316,7 @@
             android:text="캐쥬얼  " />
 
         <CheckBox
-            android:id="@+id/button3"
+            android:id="@+id/Street"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -319,19 +328,19 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
         android:orientation="horizontal">
 
         <CheckBox
-            android:id="@+id/button4"
+            android:id="@+id/Amekaji"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="아메카지" />
 
         <CheckBox
-            android:id="@+id/button5"
+            android:id="@+id/Cityboy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -339,13 +348,13 @@
             android:text="시티보이" />
 
         <CheckBox
-            android:id="@+id/button6"
+            android:id="@+id/invisiblebutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
             android:text="Button"
-            android:visibility="invisible"/>
+            android:visibility="invisible" />
 
     </LinearLayout>
 
