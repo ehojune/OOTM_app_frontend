@@ -28,6 +28,7 @@
             android:layout_toRightOf="@id/userimage"
             />
         <TextView
+            android:id="@+id/userbody"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -130,6 +131,7 @@
             android:layout_height="wrap_content"
             android:text="|"/>
         <TextView
+            android:id="@+id/genre"
             android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -101,6 +101,8 @@ public class NewPostActivity extends AppCompatActivity {
             }
         });
 
+
+
         btn_back = this.findViewById(R.id.Back);
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,6 +1,7 @@
 package com.example.cloth_recommender.Frag2;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.ImageDecoder;
 import android.graphics.drawable.BitmapDrawable;
@@ -17,16 +18,25 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
 import com.example.cloth_recommender.R;
+import com.example.cloth_recommender.server.ApiClient;
+import com.example.cloth_recommender.server.RetrofitAPI;
+import com.example.cloth_recommender.server.UserData;
+import com.example.cloth_recommender.server.postInfo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ViewPostActivity extends Activity {
 
@@ -39,9 +49,11 @@ public class ViewPostActivity extends Activity {
     PopupWindow popUp;
     boolean click = true;
     Bitmap bitmap;
-
-    //AppDataBase_gallery db;
     String uri_string;
+    TextView postuser;
+    TextView userbody;
+    TextView genre;
+    postInfo postinfo;
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
@@ -59,6 +71,25 @@ public class ViewPostActivity extends Activity {
         img = findViewById(R.id.postimage);
         //cmt = findViewById(R.id.comment);
         btn = findViewById(R.id.saveImage);
+        postuser = findViewById(R.id.postuser);
+        userbody = findViewById(R.id.userbody);
+        genre = findViewById(R.id.genre);
+        Intent intent = getIntent();
+        String postID = intent.getStringExtra("postID");
+        //retrofit api creation
+        RetrofitAPI retrofitAPI = ApiClient.getClient().create(RetrofitAPI.class);
+        Call<postInfo> callpost = retrofitAPI.getPost(postID);
+        callpost.enqueue(new Callback<postInfo>() {
+            @Override
+            public void onResponse(Call<postInfo> call, Response<postInfo> response) {
+                postinfo = response.body();
+                Log.d("postinfo", String.valueOf(postinfo.userName));
+            }
+            @Override
+            public void onFailure(Call<postInfo> call, Throwable t) {
+                Log.d("postinfo", "fail");
+            }
+        });
 
 
 
@@ -67,7 +98,8 @@ public class ViewPostActivity extends Activity {
             Log.d("look", "string"+uri_string);
             Uri uri = Uri.parse(uri_string);
             bitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(getContentResolver(), uri));
-            img.setImageBitmap(bitmap);
+            //img.setImageBitmap(bitmap);
+            img.setImageResource(R.drawable.app_logo);
 
         } catch (IOException e) {
             e.printStackTrace();
