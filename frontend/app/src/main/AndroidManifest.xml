@@ -27,6 +27,8 @@
         <activity android:name=".Frag3.LoginViewActivity"/>
         <activity android:name=".Frag2.NewPostActivity"/>
         <activity android:name=".Frag2.ViewPostActivity" />
+        <activity android:name=".Frag2.PopupActivity"
+            android:theme="@style/Theme.AppCompat.Dialog"/>
     </application>
 
 </manifest>

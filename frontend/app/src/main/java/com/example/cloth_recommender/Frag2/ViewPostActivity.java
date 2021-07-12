@@ -89,6 +89,25 @@ public class ViewPostActivity extends Activity {
                 postuser.setText(postinfo.userName);
                 userbody.setText( postinfo.userBody.height +"cm - " + postinfo.userBody.weight+ "kg");
                 genre.setText(postinfo.postgenre);
+
+
+                Intent popintent = new Intent(getApplicationContext(), PopupActivity.class);
+                ImageButton itempopup = findViewById(R.id.itempopup1);
+                itempopup.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popintent.putExtra("top", postinfo.clothInfo.top);
+                        popintent.putExtra("bot", postinfo.clothInfo.bot);
+                        popintent.putExtra("out", postinfo.clothInfo.out);
+                        popintent.putExtra("acc", postinfo.clothInfo.acc);
+                        popintent.putExtra("sho", postinfo.clothInfo.sho);
+                        startActivity(popintent);
+                    }
+                });
+
+
+
+
             }
             @Override
             public void onFailure(Call<postInfo> call, Throwable t) {

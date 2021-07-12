@@ -23,16 +23,16 @@ public class postInfo {
         public String weight;
     }
 
-    private class clothInfo {
+    public class clothInfo {
         @SerializedName("top")
-        private String top;
+        public String top;
         @SerializedName("bot")
-        private String bot;
+        public String bot;
         @SerializedName("sho")
-        private String sho;
+        public String sho;
         @SerializedName("out")
-        private String out;
+        public String out;
         @SerializedName("acc")
-        private String acc;
+        public String acc;
     }
 }
