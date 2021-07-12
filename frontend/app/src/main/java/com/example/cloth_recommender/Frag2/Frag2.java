@@ -85,7 +85,10 @@ public class Frag2 extends Fragment {
         callpostIDs.enqueue(new Callback<List<String>>() {
             @Override
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {
-                postIDList = (ArrayList<String>) response.body();
+                postIDList.clear();
+                ArrayList<String> newList = (ArrayList<String>) response.body();;
+                postIDList.addAll(newList);
+                adapter.notifyDataSetChanged();
                 Log.d("postidlist", String.valueOf(postIDList.size()));
             }
 
@@ -93,6 +96,7 @@ public class Frag2 extends Fragment {
             public void onFailure(Call<List<String>> call, Throwable t) {
             }
         });
+
         recyclerView = v.findViewById(R.id.recyclerView);
         adapter = new MultiImageAdapter(postIDList, getActivity().getApplicationContext());
         recyclerView.setAdapter(adapter);

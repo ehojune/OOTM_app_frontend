@@ -83,27 +83,16 @@ public class ViewPostActivity extends Activity {
             @Override
             public void onResponse(Call<postInfo> call, Response<postInfo> response) {
                 postinfo = response.body();
-                Log.d("postinfo", String.valueOf(postinfo.userName));
+                //Log.d("postinfo1", String.valueOf(postinfo.userName));
+                Log.d("postinfo1", postinfo.userID);
             }
             @Override
             public void onFailure(Call<postInfo> call, Throwable t) {
-                Log.d("postinfo", "fail");
+                Log.d("postinfo1", "fail");
             }
         });
+        img.setImageResource(R.drawable.app_logo);
 
-
-
-        try {
-            uri_string = getIntent().getStringExtra("image");
-            Log.d("look", "string"+uri_string);
-            Uri uri = Uri.parse(uri_string);
-            bitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(getContentResolver(), uri));
-            //img.setImageBitmap(bitmap);
-            img.setImageResource(R.drawable.app_logo);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         /*
         db = AppDataBase_gallery.getInstance(this);
         List<User_gallery> user_galleryList = db.userDao().getAll();

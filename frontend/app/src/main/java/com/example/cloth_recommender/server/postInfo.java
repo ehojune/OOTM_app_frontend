@@ -11,8 +11,11 @@ public class postInfo {
     public String userID;
     @SerializedName("userBody")
     public userBody userBody;
+    @SerializedName("clothInfo")
     public clothInfo clothInfo;
+    @SerializedName("postgenre")
     public String postgenre;
+
     private class userBody {
         @SerializedName("height")
         private String height;
