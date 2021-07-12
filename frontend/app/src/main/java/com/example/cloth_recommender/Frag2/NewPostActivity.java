@@ -221,8 +221,28 @@ public class NewPostActivity extends AppCompatActivity {
 
 
                 //postDB에 정보추가
-
-
+                HashMap<String,String> postmap = new HashMap<>();
+                postmap.put("userName", userinfo.userName);
+                postmap.put("userID", strID);
+                postmap.put("height", HeightInfo);
+                postmap.put("weight", WeightInfo);
+                postmap.put("top", TopInfo);
+                postmap.put("bot", BottomInfo);
+                postmap.put("sho", ShoeInfo);
+                postmap.put("out", OuterInfo);
+                postmap.put("acc", AccInfo);
+                postmap.put("postgenre", Genre.substring(0, Genre.length()-1));
+                Log.d("GenreArray", Genre.substring(0, Genre.length()-1));
+                Call<Void> calladdpost = retrofitAPI.addPost(postmap);
+                calladdpost.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                    }
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                    }
+                });
+                finish();
             }
         });
 

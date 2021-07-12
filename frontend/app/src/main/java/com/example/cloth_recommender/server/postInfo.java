@@ -16,11 +16,11 @@ public class postInfo {
     @SerializedName("postgenre")
     public String postgenre;
 
-    private class userBody {
+    public class userBody {
         @SerializedName("height")
-        private String height;
+        public String height;
         @SerializedName("weight")
-        private String weight;
+        public String weight;
     }
 
     private class clothInfo {
