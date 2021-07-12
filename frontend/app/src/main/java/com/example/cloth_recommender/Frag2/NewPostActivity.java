@@ -17,7 +17,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -194,6 +196,10 @@ public class NewPostActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"미입력된 정보가 있습니다.", Toast.LENGTH_SHORT).show();
                 }
                 else{
+                    Date date = new Date(System.currentTimeMillis());
+                    SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd");
+                    String getDate = sdf.format(date);
+
                     HashMap<String,String> postmap = new HashMap<>();
                     postmap.put("userName", userinfo.userName);
                     postmap.put("userID", strID);
@@ -205,6 +211,7 @@ public class NewPostActivity extends AppCompatActivity {
                     postmap.put("out", OuterInfo);
                     postmap.put("acc", AccInfo);
                     postmap.put("genrearray", Genre.substring(0, Genre.length()-1));
+                    postmap.put("date", getDate);
                     Log.d("GenreArray", Genre.substring(0, Genre.length()-1));
                     Call<Void> calladdpost = retrofitAPI.addPost(postmap);
                     calladdpost.enqueue(new Callback<Void>() {
@@ -217,36 +224,8 @@ public class NewPostActivity extends AppCompatActivity {
                     });
                     finish();
                 }
-
-
-
-                //postDB에 정보추가
-                HashMap<String,String> postmap = new HashMap<>();
-                postmap.put("userName", userinfo.userName);
-                postmap.put("userID", strID);
-                postmap.put("height", HeightInfo);
-                postmap.put("weight", WeightInfo);
-                postmap.put("top", TopInfo);
-                postmap.put("bot", BottomInfo);
-                postmap.put("sho", ShoeInfo);
-                postmap.put("out", OuterInfo);
-                postmap.put("acc", AccInfo);
-                postmap.put("postgenre", Genre.substring(0, Genre.length()-1));
-                Log.d("GenreArray", Genre.substring(0, Genre.length()-1));
-                Call<Void> calladdpost = retrofitAPI.addPost(postmap);
-                calladdpost.enqueue(new Callback<Void>() {
-                    @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
-                    }
-                    @Override
-                    public void onFailure(Call<Void> call, Throwable t) {
-                    }
-                });
-                finish();
             }
         });
-
-
     }
 
     @Override
@@ -261,79 +240,11 @@ public class NewPostActivity extends AppCompatActivity {
                 Log.e("single choice: ", String.valueOf(data.getData()));
                 imageUri = data.getData();
                 getImage.setImageURI(imageUri);
-/*
-                adapter = new MultiImageAdapter(uriList, getApplicationContext());
-                recyclerView.setAdapter(adapter);
-                //recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
-                GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
-                recyclerView.setLayoutManager(gridLayoutManager);
 
- */
-            }
- /*
-            else{      // 이미지를 여러장 선택한 경우
-                ClipData clipData = data.getClipData();
-                Log.e("clipData", String.valueOf(clipData.getItemCount()));
-
-                if(clipData.getItemCount() > 20){   // 선택한 이미지가 21장 이상인 경우
-                    Toast.makeText(getApplicationContext(), "사진은 20장까지 선택 가능합니다.", Toast.LENGTH_LONG).show();
-                }
-                else{   // 선택한 이미지가 1장 이상 20장 이하인 경우
-                    Log.e(TAG, "multiple choice");
-
-                    for (int i = 0; i < clipData.getItemCount(); i++){
-                        Uri imageUri = clipData.getItemAt(i).getUri();  // 선택한 이미지들의 uri를 가져온다.
-                        try {
-                            uriList.add(imageUri);  //uri를 list에 담는다.
-
-                        } catch (Exception e) {
-                            Log.e(TAG, "File select error", e);
-                        }
-                    }
-
-                    adapter = new MultiImageAdapter(uriList, getApplicationContext());
-                    recyclerView    .setAdapter(adapter);   // 리사이클러뷰에 어댑터 세팅
-                    //recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));     // 리사이클러뷰 수평 스크롤 적용
-                    GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
-                    recyclerView.setLayoutManager(gridLayoutManager);
-*/
-
-
-
-        }
-    }
-/*
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(data == null){   // 어떤 이미지도 선택하지 않은 경우
-            Toast.makeText(getApplicationContext(), "이미지를 선택하지 않았습니다.", Toast.LENGTH_LONG).show();
-        }
-        else{   // 이미지를 하나라도 선택한 경우
-            if(data.getClipData() == null){     // 이미지를 하나만 선택한 경우
-                Log.e("single choice: ", String.valueOf(data.getData()));
-                imageUri = data.getData();
-                getImage.setImageURI(imageUri);
             }
         }
     }
 
-
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(202, resultCode, data);
-
-        if(data == null){   // 어떤 이미지도 선택하지 않은 경우
-            Toast.makeText(getApplicationContext(), "이미지를 선택하지 않았습니다.", Toast.LENGTH_LONG).show();
-        }
-        else{
-            if(data.getClipData() == null){     // 이미지를 하나만 선택한 경우
-                Log.e("single choice: ", String.valueOf(data.getData()));
-                imageUri = data.getData();
-                getImage.setImageURI(imageUri);
-            }
-        }
-    }
- */
 }
 
 

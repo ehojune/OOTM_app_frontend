@@ -68,6 +68,7 @@ public class MultiImageAdapter extends RecyclerView.Adapter<MultiImageAdapter.Vi
                 intent.putExtra("postID", postID);
                 //postID를 전달해주는게필요함
                 v.getContext().startActivity(intent);
+
             }
         });
     }

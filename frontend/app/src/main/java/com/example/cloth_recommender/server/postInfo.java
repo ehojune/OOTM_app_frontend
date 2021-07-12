@@ -15,6 +15,8 @@ public class postInfo {
     public clothInfo clothInfo;
     @SerializedName("postgenre")
     public String postgenre;
+    @SerializedName("date")
+    public String date;
 
     public class userBody {
         @SerializedName("height")

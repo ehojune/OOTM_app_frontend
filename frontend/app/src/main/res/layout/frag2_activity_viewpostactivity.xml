@@ -80,7 +80,7 @@
             android:background="@null"
             />
         <CheckBox
-            android:id="@+id/bookmarkbtn"
+            android:id="@+id/markbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/download_btn"
@@ -91,6 +91,7 @@
             android:layout_marginRight="10dp"
             android:background="@null"/>
         <ImageButton
+            android:id="@+id/deleteBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_delete_outline_24"
@@ -114,7 +115,7 @@
         app:layout_constraintStart_toStartOf="parent">
         <TextView
             android:layout_marginLeft="10dp"
-            android:id="@+id/comment"
+            android:id="@+id/datetext"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="15sp"

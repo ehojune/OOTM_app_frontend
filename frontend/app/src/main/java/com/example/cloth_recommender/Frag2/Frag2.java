@@ -38,10 +38,10 @@ public class Frag2 extends Fragment {
 
     private static final String TAG = "MultiImageActivity";
     ArrayList<Uri> uriList = new ArrayList<>();     // 이미지의 uri를 담을 ArrayList 객체
-    ArrayList<String> postIDList = new ArrayList<>();
+    public static ArrayList<String> postIDList = new ArrayList<>();
 
     RecyclerView recyclerView;  // 이미지를 보여줄 리사이클러뷰
-    MultiImageAdapter adapter;  // 리사이클러뷰에 적용시킬 어댑터
+    public static MultiImageAdapter adapter;  // 리사이클러뷰에 적용시킬 어댑터
 
 
 
@@ -61,7 +61,7 @@ public class Frag2 extends Fragment {
                 Intent intent = getActivity().getIntent();
                 String strID = intent.getStringExtra("userid");
                 intentnewpost.putExtra("userid", strID);
-                startActivity(intentnewpost);
+                startActivityForResult(intentnewpost, 1);
             }
         });
 
@@ -75,7 +75,6 @@ public class Frag2 extends Fragment {
                 ArrayList<String> newList = (ArrayList<String>) response.body();;
                 postIDList.addAll(newList);
                 adapter.notifyDataSetChanged();
-                Log.d("postidlist", String.valueOf(postIDList.size()));
             }
 
             @Override
@@ -96,18 +95,32 @@ public class Frag2 extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         // 앨범으로 이동하는 버튼
-
-
     }
-/*
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.e("single choice: ", String.valueOf(data.getData()));
-        Uri imageUri = data.getData();
-        uriList.add(imageUri);
+        RetrofitAPI retrofitAPI = ApiClient.getClient().create(RetrofitAPI.class);
+        Call<List<String>> callpostIDs = retrofitAPI.getPostID();
+        callpostIDs.enqueue(new Callback<List<String>>() {
+            @Override
+            public void onResponse(Call<List<String>> call, Response<List<String>> response) {
+                postIDList.clear();
+                ArrayList<String> newList = (ArrayList<String>) response.body();;
+                postIDList.addAll(newList);
+                adapter.notifyDataSetChanged();
+            }
+            @Override
+            public void onFailure(Call<List<String>> call, Throwable t) {
+            }
+        });
+        recyclerView = getActivity().findViewById(R.id.recyclerView);
+        adapter = new MultiImageAdapter(postIDList, getActivity().getApplicationContext());
+        recyclerView.setAdapter(adapter);
+        //recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
+        recyclerView.setLayoutManager(gridLayoutManager);
     }
-*/
+
 }

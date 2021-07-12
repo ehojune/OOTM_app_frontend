@@ -32,4 +32,20 @@ public interface RetrofitAPI {
     @POST("/post/add")
     Call<Void> addPost(@Body HashMap<String,String> postmap);
 
+    @POST("/post/delete")
+    Call<Void> deletePost(@Body HashMap<String,String> postid);
+
+    @POST("/post/setlike")
+    Call<Void> setLike(@Body HashMap<String,String> idmap);
+
+    @POST("/post/setmark")
+    Call<Void> setMark(@Body HashMap<String,String> idmap);
+
+    @GET("/post/getlike/{postID}")
+    Call<List<String>> getLike(@Path("postID") String postID);
+
+    @GET("/post/getmark/{postID}")
+    Call<List<String>> getMark(@Path("postID") String postID);
+
+
 }
