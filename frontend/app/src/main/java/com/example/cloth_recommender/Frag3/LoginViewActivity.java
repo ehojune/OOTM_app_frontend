@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
+import com.example.cloth_recommender.App;
 import com.example.cloth_recommender.LoginActivity;
 import com.example.cloth_recommender.R;
 import com.example.cloth_recommender.server.ApiClient;
@@ -61,7 +62,7 @@ public class LoginViewActivity extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.frag3_loginview,container, false);
-
+        App appState = ((App)getActivity().getApplicationContext());
         SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.frag3_refresh_layout);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -69,7 +70,7 @@ public class LoginViewActivity extends Fragment {
                 //retrofit api creation
 
                 RetrofitAPI retrofitAPI2 = ApiClient.getClient().create(RetrofitAPI.class);
-                Call<List<String>> callpostIDs = retrofitAPI2.getPostID();
+                Call<List<String>> callpostIDs = retrofitAPI2.getPostID_mypage(appState.getState());
                 callpostIDs.enqueue(new Callback<List<String>>() {
                     @Override
                     public void onResponse(Call<List<String>> call, Response<List<String>> response) {
@@ -225,7 +226,7 @@ public class LoginViewActivity extends Fragment {
         // Frag2에서 그대로 가져옴
 //retrofit api creation
         //RetrofitAPI retrofitAPI = ApiClient.getClient().create(RetrofitAPI.class);
-        Call<List<String>> callpostIDs = retrofitAPI.getPostID();
+        Call<List<String>> callpostIDs = retrofitAPI.getPostID_mypage(appState.getState());
         callpostIDs.enqueue(new Callback<List<String>>() {
             @Override
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {
@@ -268,9 +269,9 @@ public class LoginViewActivity extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         int imgindex = resultCode;
-
+        App appState = ((App)getActivity().getApplicationContext());
         RetrofitAPI retrofitAPI = ApiClient.getClient().create(RetrofitAPI.class);
-        Call<List<String>> callpostIDs = retrofitAPI.getPostID();
+        Call<List<String>> callpostIDs = retrofitAPI.getPostID_mypage(appState.getState());
         callpostIDs.enqueue(new Callback<List<String>>() {
             @Override
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {

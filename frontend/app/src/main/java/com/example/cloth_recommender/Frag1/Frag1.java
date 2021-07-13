@@ -22,6 +22,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.cloth_recommender.App;
 import com.example.cloth_recommender.Frag2.NewPostActivity;
 import com.example.cloth_recommender.R;
 import com.example.cloth_recommender.server.ApiClient;
@@ -42,11 +43,13 @@ public class Frag1 extends Fragment {
     int imgindex;
 
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.frag1,container,false);
 
+        App appState = ((App)getActivity().getApplicationContext());
         SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.frag1_refresh_layout);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -54,7 +57,9 @@ public class Frag1 extends Fragment {
                 //retrofit api creation
 
                 RetrofitAPI retrofitAPI2 = ApiClient.getClient().create(RetrofitAPI.class);
-                Call<List<String>> callpostIDs = retrofitAPI2.getPostID();
+
+
+                Call<List<String>> callpostIDs = retrofitAPI2.getPostID_bmk(appState.getState());
                 callpostIDs.enqueue(new Callback<List<String>>() {
                     @Override
                     public void onResponse(Call<List<String>> call, Response<List<String>> response) {
@@ -75,13 +80,9 @@ public class Frag1 extends Fragment {
         });
 
 
-
-
-
-
         //retrofit api creation
         RetrofitAPI retrofitAPI = ApiClient.getClient().create(RetrofitAPI.class);
-        Call<List<String>> callpostIDs = retrofitAPI.getPostID();
+        Call<List<String>> callpostIDs = retrofitAPI.getPostID_bmk(appState.getState());
         callpostIDs.enqueue(new Callback<List<String>>() {
             @Override
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {
@@ -126,11 +127,11 @@ public class Frag1 extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        App appState = ((App)getActivity().getApplicationContext());
         int imgindex = resultCode;
 
         RetrofitAPI retrofitAPI = ApiClient.getClient().create(RetrofitAPI.class);
-        Call<List<String>> callpostIDs = retrofitAPI.getPostID();
+        Call<List<String>> callpostIDs = retrofitAPI.getPostID_bmk(appState.getState());
         callpostIDs.enqueue(new Callback<List<String>>() {
             @Override
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {

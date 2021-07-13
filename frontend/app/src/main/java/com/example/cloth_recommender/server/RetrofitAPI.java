@@ -23,6 +23,12 @@ public interface RetrofitAPI {
     @GET("/post/getpostid")
     Call<List<String>> getPostID();
 
+    @GET("/post/getpostid-mypage/{userID}")
+    Call<List<String>> getPostID_mypage(@Path("userID") String userID);
+
+    @GET("/post/getpostid-bmk/{userID}")
+    Call<List<String>> getPostID_bmk(@Path("userID") String userID);
+
     @POST("/user/login")
     Call<Void> putNewUser(@Body HashMap<String, String> map);
 
