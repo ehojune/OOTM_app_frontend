@@ -28,11 +28,13 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.example.cloth_recommender.App;
+import com.example.cloth_recommender.Frag2.NewPostActivity;
 import com.example.cloth_recommender.LoginActivity;
 import com.example.cloth_recommender.R;
 import com.example.cloth_recommender.server.ApiClient;
 import com.example.cloth_recommender.server.RetrofitAPI;
 import com.example.cloth_recommender.server.UserData;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kakao.network.ApiErrorCode;
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
@@ -97,12 +99,18 @@ public class LoginViewActivity extends Fragment {
 
         RetrofitAPI retrofitAPI = ApiClient.getClient().create(RetrofitAPI.class);
 
+        FloatingActionButton btn_Newpostactivity = v.findViewById(R.id.NewPostActivity);
+        btn_Newpostactivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentnewpost = new Intent(v.getContext(), NewPostActivity.class);
+                Intent intent = getActivity().getIntent();
+                strID = intent.getStringExtra("userid");
+                intentnewpost.putExtra("userid", strID);
+                startActivityForResult(intentnewpost, 1);
 
-
-
-
-
-
+            }
+        });
 
         TextView tvNickname = v.findViewById(R.id.tvNickname);
         ImageView ivProfile = v.findViewById(R.id.ivProfile);

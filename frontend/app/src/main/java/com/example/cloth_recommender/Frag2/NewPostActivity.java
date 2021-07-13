@@ -61,9 +61,9 @@ public class NewPostActivity extends AppCompatActivity {
 
     private CheckBox Minimal;
     private CheckBox Casual;
-    private CheckBox Street;
     private CheckBox Amekaji;
     private CheckBox Cityboy;
+    private CheckBox Street;
     public static String strID;
     int imgindex=9;
 
@@ -164,7 +164,7 @@ public class NewPostActivity extends AppCompatActivity {
                     GenreArray.add("Casual");
                 }
                 Street = findViewById(R.id.Street);
-                if (((CheckBox) Casual).isChecked()){
+                if (((CheckBox) Street).isChecked()){
                     GenreArray.add("Street");
                 }
                 Amekaji = findViewById(R.id.Amekaji);
