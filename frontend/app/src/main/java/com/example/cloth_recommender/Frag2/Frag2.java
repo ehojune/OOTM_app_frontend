@@ -81,7 +81,7 @@ public class Frag2 extends Fragment {
             };
         });
 
-        FloatingActionButton btn_Newpostactivity = v.findViewById(R.id.NewPostActivity);
+        FloatingActionButton btn_Newpostactivity = v.findViewById(R.id.NewPostActivity2);
         btn_Newpostactivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,6 +93,7 @@ public class Frag2 extends Fragment {
 
             }
         });
+
 
         //retrofit api creation
         RetrofitAPI retrofitAPI = ApiClient.getClient().create(RetrofitAPI.class);
