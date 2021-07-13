@@ -119,7 +119,7 @@ public class LoginViewActivity extends Fragment {
 
         //TextView tvEmail = v.findViewById(R.id.tvEmail);
         //TextView tvAgeRange = v.findViewById(R.id.tvAgeRange);
-        //TextView tvGender = v.findViewById(R.id.tvGender);
+        TextView tvGender = v.findViewById(R.id.tvGender);
         //TextView tvBirthday = v.findViewById(R.id.tvBirthday);
 
         Intent intent = getActivity().getIntent();
@@ -169,7 +169,7 @@ public class LoginViewActivity extends Fragment {
 
         //tvEmail.setText(strEmail);
         //tvAgeRange.setText(strAgeRange);
-        //tvGender.setText(strGender);
+        tvGender.setText(strGender);
         //tvBirthday.setText(strBirthday);
 
 

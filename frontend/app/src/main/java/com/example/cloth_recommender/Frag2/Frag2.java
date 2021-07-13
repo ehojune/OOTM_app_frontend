@@ -127,7 +127,7 @@ public class Frag2 extends Fragment {
         adapter = new MultiImageAdapter(postIDList, getActivity().getApplicationContext(), imgindex, imgarr);
         recyclerView.setAdapter(adapter);
         //recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
 
         return v;
@@ -180,7 +180,7 @@ public class Frag2 extends Fragment {
         adapter = new MultiImageAdapter(postIDList, getActivity().getApplicationContext(), imgindex, imgarr);
         recyclerView.setAdapter(adapter);
         //recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
     }
 

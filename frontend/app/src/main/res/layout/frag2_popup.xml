@@ -13,7 +13,7 @@
             android:textSize="20sp"
             android:textColor="#fff"
             android:gravity="center"
-            android:background="#ff7a00"
+            android:background="#760c0c"
             android:layout_width="match_parent"
             android:layout_height="53dp" />
     </LinearLayout>
@@ -80,7 +80,7 @@
         <Button
             android:text="닫기"
             android:textSize="15sp"
-            android:textColor="#ff7a00"
+            android:textColor="#760c0c"
             android:padding="16dp"
             android:gravity="center"
             android:background="#00000000"
