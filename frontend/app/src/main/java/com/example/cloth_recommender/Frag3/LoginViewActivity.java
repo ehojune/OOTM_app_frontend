@@ -3,6 +3,7 @@ package com.example.cloth_recommender.Frag3;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.example.cloth_recommender.LoginActivity;
@@ -47,38 +49,49 @@ public class LoginViewActivity extends Fragment {
 
     String strNickname;
     String strProfile;
-    public static String strID;
+    String strID;
     String strEmail, strAgeRange, strGender, strBirthday;
-
     List<UserData> forTest;
-
-    private static final String TAG = "MultiImageActivity";
-    ArrayList<Uri> uriList = new ArrayList<>();     // 이미지의 uri를 담을 ArrayList 객체
     public static ArrayList<String> postIDList = new ArrayList<>();
-
     RecyclerView recyclerView;  // 이미지를 보여줄 리사이클러뷰
     public static com.example.cloth_recommender.Frag3.MultiImageAdapter adapter;  // 리사이클러뷰에 적용시킬 어댑터
-    String strID2;
+    int imgindex;
 
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.frag3_loginview,container, false);
 
-        RetrofitAPI retrofitAPI = ApiClient.getClient().create(RetrofitAPI.class);
-        Call<List<UserData>> call = retrofitAPI.getData();
-        call.enqueue(new Callback<List<UserData>>(){
+        SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.frag3_refresh_layout);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onResponse(Call<List<UserData>> call, Response<List<UserData>> response){
-                forTest = response.body();
-                //Log.d("fortest", String.valueOf(forTest.get(0)));
-            }
-            @Override
-            public void onFailure(Call<List<UserData>> call, Throwable t) {
+            public void onRefresh(){
+                //retrofit api creation
+
+                RetrofitAPI retrofitAPI2 = ApiClient.getClient().create(RetrofitAPI.class);
+                Call<List<String>> callpostIDs = retrofitAPI2.getPostID();
+                callpostIDs.enqueue(new Callback<List<String>>() {
+                    @Override
+                    public void onResponse(Call<List<String>> call, Response<List<String>> response) {
+                        postIDList.clear();
+                        ArrayList<String> newList = (ArrayList<String>) response.body();;
+                        postIDList.addAll(newList);
+                        adapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<String>> call, Throwable t) {
+                    }
+                });
 
 
-            }
+                mSwipeRefreshLayout.setRefreshing(false);
+            };
         });
+
+
+
+        RetrofitAPI retrofitAPI = ApiClient.getClient().create(RetrofitAPI.class);
 
         TextView tvNickname = v.findViewById(R.id.tvNickname);
         ImageView ivProfile = v.findViewById(R.id.ivProfile);
@@ -109,8 +122,6 @@ public class LoginViewActivity extends Fragment {
             public void onFailure(Call<Void> call, Throwable t) {
             }
         });
-
-
 
         strEmail = intent.getStringExtra("email");
         strAgeRange = intent.getStringExtra("ageRange");
@@ -210,11 +221,11 @@ public class LoginViewActivity extends Fragment {
             }
         });
 
-        // Frag2에서 그대로 가져옴
 
-        //retrofit api creation
-        RetrofitAPI retrofitAPI2 = ApiClient.getClient().create(RetrofitAPI.class);
-        Call<List<String>> callpostIDs = retrofitAPI2.getPostID();
+        // Frag2에서 그대로 가져옴
+//retrofit api creation
+        //RetrofitAPI retrofitAPI = ApiClient.getClient().create(RetrofitAPI.class);
+        Call<List<String>> callpostIDs = retrofitAPI.getPostID();
         callpostIDs.enqueue(new Callback<List<String>>() {
             @Override
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {
@@ -229,8 +240,20 @@ public class LoginViewActivity extends Fragment {
             }
         });
 
-        recyclerView = v.findViewById(R.id.recyclerView2);
-        adapter = new com.example.cloth_recommender.Frag3.MultiImageAdapter(postIDList, getActivity().getApplicationContext());
+        ArrayList<Drawable> imgarr = new ArrayList<Drawable>();
+        imgarr.add(getResources().getDrawable(R.drawable.outfit1));
+        imgarr.add(getResources().getDrawable(R.drawable.outfit2));
+        imgarr.add(getResources().getDrawable(R.drawable.outfit3));
+        imgarr.add(getResources().getDrawable(R.drawable.outfit4));
+        imgarr.add(getResources().getDrawable(R.drawable.outfit5));
+        imgarr.add(getResources().getDrawable(R.drawable.outfit6));
+        imgarr.add(getResources().getDrawable(R.drawable.outfit7));
+        imgarr.add(getResources().getDrawable(R.drawable.outfit8));
+        imgarr.add(getResources().getDrawable(R.drawable.outfit9));
+        imgarr.add(getResources().getDrawable(R.drawable.clothicon));
+
+        recyclerView = v.findViewById(R.id.recyclerView3);
+        adapter = new com.example.cloth_recommender.Frag3.MultiImageAdapter(postIDList, getActivity().getApplicationContext(), imgindex, imgarr);
         recyclerView.setAdapter(adapter);
         //recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
@@ -238,9 +261,48 @@ public class LoginViewActivity extends Fragment {
 
         return v;
 
+    }
 
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        int imgindex = resultCode;
 
+        RetrofitAPI retrofitAPI = ApiClient.getClient().create(RetrofitAPI.class);
+        Call<List<String>> callpostIDs = retrofitAPI.getPostID();
+        callpostIDs.enqueue(new Callback<List<String>>() {
+            @Override
+            public void onResponse(Call<List<String>> call, Response<List<String>> response) {
+                postIDList.clear();
+                ArrayList<String> newList = (ArrayList<String>) response.body();;
+                postIDList.addAll(newList);
+                adapter.notifyDataSetChanged();
 
+            }
+            @Override
+            public void onFailure(Call<List<String>> call, Throwable t) {
+                Log.d("aaaaaa","fail");
+            }
+        });
+        recyclerView = getActivity().findViewById(R.id.recyclerView3);
+
+        ArrayList<Drawable> imgarr = new ArrayList<Drawable>();
+        imgarr.add(getResources().getDrawable(R.drawable.outfit1));
+        imgarr.add(getResources().getDrawable(R.drawable.outfit2));
+        imgarr.add(getResources().getDrawable(R.drawable.outfit3));
+        imgarr.add(getResources().getDrawable(R.drawable.outfit4));
+        imgarr.add(getResources().getDrawable(R.drawable.outfit5));
+        imgarr.add(getResources().getDrawable(R.drawable.outfit6));
+        imgarr.add(getResources().getDrawable(R.drawable.outfit7));
+        imgarr.add(getResources().getDrawable(R.drawable.outfit8));
+        imgarr.add(getResources().getDrawable(R.drawable.outfit9));
+        imgarr.add(getResources().getDrawable(R.drawable.clothicon));
+
+        adapter = new com.example.cloth_recommender.Frag3.MultiImageAdapter(postIDList, getActivity().getApplicationContext(), imgindex, imgarr);
+        recyclerView.setAdapter(adapter);
+        //recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
+        recyclerView.setLayoutManager(gridLayoutManager);
     }
 }

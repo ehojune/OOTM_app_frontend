@@ -65,7 +65,7 @@ public class NewPostActivity extends AppCompatActivity {
     private CheckBox Amekaji;
     private CheckBox Cityboy;
     public static String strID;
-    int imgindex;
+    int imgindex=9;
 
 
 
@@ -181,7 +181,7 @@ public class NewPostActivity extends AppCompatActivity {
                     Genre += s + "_";
                 }
 
-                if(OuterInfo.length() * TopInfo.length() * BottomInfo.length() * AccInfo.length() * ShoeInfo.length() * Genre.length()== 0){
+                if(OuterInfo.length() * TopInfo.length() * BottomInfo.length() * AccInfo.length() * ShoeInfo.length() * Genre.length()== 0 || imgindex==9){
                     Toast.makeText(getApplicationContext(),"미입력된 정보가 있습니다.", Toast.LENGTH_SHORT).show();
                 }
                 else{

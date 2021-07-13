@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -55,6 +56,31 @@ public class Frag2 extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.frag2,container,false);
+
+        SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.frag2_refresh_layout);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh(){
+                //retrofit api creation
+                RetrofitAPI retrofitAPI2 = ApiClient.getClient().create(RetrofitAPI.class);
+                Call<List<String>> callpostIDs = retrofitAPI2.getPostID();
+                callpostIDs.enqueue(new Callback<List<String>>() {
+                    @Override
+                    public void onResponse(Call<List<String>> call, Response<List<String>> response) {
+                        postIDList.clear();
+                        ArrayList<String> newList = (ArrayList<String>) response.body();;
+                        postIDList.addAll(newList);
+                        adapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<String>> call, Throwable t) {
+                    }
+                });
+                mSwipeRefreshLayout.setRefreshing(false);
+            };
+        });
+
         FloatingActionButton btn_Newpostactivity = v.findViewById(R.id.NewPostActivity);
         btn_Newpostactivity.setOnClickListener(new View.OnClickListener() {
             @Override
