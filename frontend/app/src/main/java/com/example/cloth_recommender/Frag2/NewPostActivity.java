@@ -2,7 +2,6 @@ package com.example.cloth_recommender.Frag2;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,7 +20,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 import com.example.cloth_recommender.R;
 import com.example.cloth_recommender.server.ApiClient;
@@ -97,7 +95,7 @@ public class NewPostActivity extends AppCompatActivity {
 
 
 
-        getImage = this.findViewById(R.id.Uploadimg1);
+        getImage = this.findViewById(R.id.img4);
         getImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,7 +109,7 @@ public class NewPostActivity extends AppCompatActivity {
         });
 
 
-        getImage2 = this.findViewById(R.id.Uploadimg2);
+        getImage2 = this.findViewById(R.id.img5);
         getImage2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,7 +122,7 @@ public class NewPostActivity extends AppCompatActivity {
             }
         });
 
-        getImage3 = this.findViewById(R.id.Uploadimg3);
+        getImage3 = this.findViewById(R.id.img6);
         getImage3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

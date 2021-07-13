@@ -65,7 +65,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/Uploadimg1"
+            android:id="@+id/img4"
             android:layout_width="108dp"
             android:layout_height="108dp"
             android:layout_weight="1"
@@ -73,7 +73,7 @@
             app:srcCompat="@drawable/app_logo" />
 
         <ImageView
-            android:id="@+id/Uploadimg2"
+            android:id="@+id/img5"
             android:layout_width="108dp"
             android:layout_height="108dp"
             android:layout_weight="1"
@@ -81,7 +81,7 @@
             app:srcCompat="@drawable/app_logo" />
 
         <ImageView
-            android:id="@+id/Uploadimg3"
+            android:id="@+id/img6"
             android:layout_width="108dp"
             android:layout_height="108dp"
             android:layout_weight="1"
