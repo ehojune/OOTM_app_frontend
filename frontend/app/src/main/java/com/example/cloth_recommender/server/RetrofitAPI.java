@@ -23,6 +23,12 @@ public interface RetrofitAPI {
     @GET("/post/getpostid")
     Call<List<String>> getPostID();
 
+    @GET("/post/getpostid-mypage/{userID}")
+    Call<List<String>> getPostID_mypage(@Path("userID") String userID);
+
+    @GET("/post/getpostid-bmk/{userID}")
+    Call<List<String>> getPostID_bmk(@Path("userID") String userID);
+
     @POST("/user/login")
     Call<Void> putNewUser(@Body HashMap<String, String> map);
 
@@ -33,7 +39,7 @@ public interface RetrofitAPI {
     Call<Void> addPost(@Body HashMap<String,String> postmap);
 
     @POST("/post/delete")
-    Call<Void> deletePost(@Body HashMap<String,String> postid);
+    Call<Void> deletePost(@Body HashMap<String,String> map);
 
     @POST("/post/setlike")
     Call<Void> setLike(@Body HashMap<String,String> idmap);
