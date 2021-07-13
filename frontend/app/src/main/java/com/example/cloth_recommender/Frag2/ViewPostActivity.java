@@ -158,8 +158,8 @@ public class ViewPostActivity extends Activity {
 
 
 
-                Intent popintent = new Intent(getApplicationContext(), UserInfoPopupActivity.class);
-                Button itempopup = findViewById(R.id.btnDetailInfo);
+                Intent popintent = new Intent(getApplicationContext(), ViewPostActivity.class);
+                ImageButton itempopup = findViewById(R.id.itempopup1);
                 itempopup.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
