@@ -5,9 +5,7 @@
     android:id="@+id/frag2_refresh_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:id="@+id/myconstraintlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -26,7 +24,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
+                android:layout_marginLeft="20dp"
                 android:backgroundTint="@color/white"
                 android:layout_gravity="center_vertical"
                 android:text="NEW OUTFIT"
@@ -42,7 +40,30 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:background="@color/white"/>
+            android:background="@color/white">
+
+            <com.google.android.material.chip.ChipGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20dp">
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/newchip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:text="New"/>
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/hotchip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    app:checkedIconTint="@color/black"
+                    android:text="Hot"/>
+            </com.google.android.material.chip.ChipGroup>
+
+        </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -56,7 +77,6 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:layout_editor_absoluteY="100dp">
-
             </androidx.recyclerview.widget.RecyclerView>
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/NewPostActivity2"

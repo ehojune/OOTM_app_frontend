@@ -23,6 +23,9 @@ public interface RetrofitAPI {
     @GET("/post/getpostid")
     Call<List<String>> getPostID();
 
+    @GET("/post/getpostid-hot")
+    Call<List<String>> getPostID_hot();
+
     @GET("/post/getpostid-mypage/{userID}")
     Call<List<String>> getPostID_mypage(@Path("userID") String userID);
 

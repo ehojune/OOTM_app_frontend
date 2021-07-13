@@ -2,6 +2,7 @@ package com.example.cloth_recommender.server;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class postInfo {
@@ -17,6 +18,10 @@ public class postInfo {
     public String postgenre;
     @SerializedName("date")
     public String date;
+    @SerializedName("wishUsers")
+    public ArrayList<String> wishUsers;
+    @SerializedName("markUsers")
+    public ArrayList<String> markUsers;
 
     @SerializedName("postImage")
     public String postImage;

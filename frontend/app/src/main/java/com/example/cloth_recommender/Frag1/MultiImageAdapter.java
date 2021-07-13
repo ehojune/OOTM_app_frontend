@@ -30,7 +30,7 @@ public class MultiImageAdapter extends RecyclerView.Adapter<MultiImageAdapter.Vi
     ArrayList<Drawable> mImgarr;
     boolean isImageFitToScreen;
     // 생성자에서 데이터 리스트 객체, Context를 전달받음.
-    MultiImageAdapter(ArrayList<String> list, Context context, int imgindex, ArrayList<Drawable> imgarr) {
+    public MultiImageAdapter(ArrayList<String> list, Context context, int imgindex, ArrayList<Drawable> imgarr) {
         mData = list ;
         mContext = context;
         mImgindex = imgindex;

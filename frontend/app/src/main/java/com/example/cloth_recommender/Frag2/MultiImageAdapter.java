@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -46,10 +47,12 @@ public class MultiImageAdapter extends RecyclerView.Adapter<MultiImageAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView image;
+        TextView marktext;
         ViewHolder(View itemView) {
             super(itemView) ;
             // 뷰 객체에 대한 참조.
             image = itemView.findViewById(R.id.galleryimage2);
+            marktext = itemView.findViewById(R.id.totalmarknum);
 
         }
     }
@@ -86,6 +89,8 @@ public class MultiImageAdapter extends RecyclerView.Adapter<MultiImageAdapter.Vi
             public void onResponse(Call<postInfo> call, Response<postInfo> response) {
                 mImgindex= Integer.parseInt(response.body().postImage);
                 holder.image.setImageDrawable(mImgarr.get(mImgindex));
+                holder.marktext.setText(Integer.toString(response.body().markUsers.size()));
+
             }
             @Override
             public void onFailure(Call<postInfo> call, Throwable t) {

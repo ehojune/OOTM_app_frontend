@@ -35,14 +35,11 @@ public class MultiImageAdapter extends RecyclerView.Adapter<MultiImageAdapter.Vi
     boolean isImageFitToScreen;
     // 생성자에서 데이터 리스트 객체, Context를 전달받음.
     public MultiImageAdapter(ArrayList<String> list, Context context, int imgindex, ArrayList<Drawable> imgarr) {
-
         mData = list ;
         mContext = context;
         mImgindex = imgindex;
         mImgarr = imgarr;
     }
-
-
     // 아이템 뷰를 저장하는 뷰홀더 클래스.
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -71,12 +68,6 @@ public class MultiImageAdapter extends RecyclerView.Adapter<MultiImageAdapter.Vi
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         String postID = mData.get(position) ;
-
-        /**
-         Glide.with(mContext)
-         .load("https://cdn.pixabay.com/photo/2019/12/26/10/44/horse-4720178_1280.jpg")
-         .into(holder.image);*/
-
 
         //retrofit api creation
         RetrofitAPI retrofitAPI = ApiClient.getClient().create(RetrofitAPI.class);

@@ -9,11 +9,34 @@
     android:layout_marginTop="1dp"
     android:layout_marginBottom="1dp">
 
-    <ImageView
-        android:id="@+id/galleryimage2"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:src="@drawable/app_logo"/>
+    <RelativeLayout
+        android:layout_width="200dp"
+        android:layout_height="200dp">
+        <ImageView
+            android:id="@+id/galleryimage2"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:src="@drawable/app_logo"/>
+        <ImageView
+            android:id="@+id/totalmark"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_margin="5dp"
+            android:src="@drawable/ic_baseline_bookmark_24"
+            android:layout_alignParentBottom="true"
+            app:tint="@color/white" />
+        <TextView
+            android:id="@+id/totalmarknum"
+            android:layout_height="25dp"
+            android:layout_marginBottom="7dp"
+            android:layout_width="wrap_content"
+            android:textSize="20dp"
+            android:text="0"
+            android:textColor="@color/white"
+            android:layout_toRightOf="@id/totalmark"
+            android:layout_alignParentBottom="true"
+            />
+    </RelativeLayout>
 
 
 </LinearLayout>

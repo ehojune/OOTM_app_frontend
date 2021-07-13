@@ -6,25 +6,29 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Frag2.ViewPostActivity">
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:backgroundTint="#EFEFEF"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/userimage"
             android:layout_margin="10dp"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:src="@drawable/profileinfo"
             />
         <TextView
             android:id="@+id/postuser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
             android:layout_marginLeft="10dp"
             android:textStyle="bold"
             android:text="Nickname"
+            android:textSize="20sp"
             android:layout_toRightOf="@id/userimage"
             />
         <TextView
@@ -66,6 +70,14 @@
             android:layout_marginLeft="10dp"
             android:button="@drawable/wish_btn"
             />
+        <TextView
+            android:id="@+id/likenum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="0"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"

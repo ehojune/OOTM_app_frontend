@@ -31,6 +31,7 @@ import com.example.cloth_recommender.R;
 import com.example.cloth_recommender.server.ApiClient;
 import com.example.cloth_recommender.server.RetrofitAPI;
 import com.example.cloth_recommender.server.UserData;
+import com.google.android.material.chip.Chip;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import retrofit2.Call;
@@ -42,6 +43,8 @@ public class Frag2 extends Fragment {
     private static final String TAG = "MultiImageActivity";
     ArrayList<Uri> uriList = new ArrayList<>();     // 이미지의 uri를 담을 ArrayList 객체
     public static ArrayList<String> postIDList = new ArrayList<>();
+    public static ArrayList<String> hotList = new ArrayList<>();
+    public static ArrayList<String> newList = new ArrayList<>();
 
     RecyclerView recyclerView;  // 이미지를 보여줄 리사이클러뷰
     public static MultiImageAdapter adapter;  // 리사이클러뷰에 적용시킬 어댑터
@@ -57,13 +60,64 @@ public class Frag2 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.frag2,container,false);
 
+        Chip newchip = v.findViewById(R.id.newchip);
+        Chip hotchip = v.findViewById(R.id.hotchip);
+        newchip.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                hotchip.setChecked(!(newchip.isChecked()));
+                RetrofitAPI retrofitAPI2 = ApiClient.getClient().create(RetrofitAPI.class);
+                Call<List<String>> callpostIDs = retrofitAPI2.getPostID();
+                callpostIDs.enqueue(new Callback<List<String>>() {
+                    @Override
+                    public void onResponse(Call<List<String>> call, Response<List<String>> response) {
+                        postIDList.clear();
+                        hotList = (ArrayList<String>) response.body();;
+                        postIDList.addAll(hotList);
+                        adapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<String>> call, Throwable t) {
+                    }
+                });
+            }
+        });
+        hotchip.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                newchip.setChecked(!(hotchip.isChecked()));
+                RetrofitAPI retrofitAPI2 = ApiClient.getClient().create(RetrofitAPI.class);
+                Call<List<String>> callpostIDs = retrofitAPI2.getPostID_hot();
+                callpostIDs.enqueue(new Callback<List<String>>() {
+                    @Override
+                    public void onResponse(Call<List<String>> call, Response<List<String>> response) {
+                        postIDList.clear();
+                        newList = (ArrayList<String>) response.body();;
+                        postIDList.addAll(newList);
+                        adapter.notifyDataSetChanged();
+                    }
+                    @Override
+                    public void onFailure(Call<List<String>> call, Throwable t) {
+                    }
+                });
+
+            }
+        });
+
         SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.frag2_refresh_layout);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh(){
                 //retrofit api creation
                 RetrofitAPI retrofitAPI2 = ApiClient.getClient().create(RetrofitAPI.class);
-                Call<List<String>> callpostIDs = retrofitAPI2.getPostID();
+                Call<List<String>> callpostIDs;
+                if(hotchip.isChecked()){
+                    callpostIDs = retrofitAPI2.getPostID_hot();
+                }
+                else{
+                    callpostIDs = retrofitAPI2.getPostID();
+                }
                 callpostIDs.enqueue(new Callback<List<String>>() {
                     @Override
                     public void onResponse(Call<List<String>> call, Response<List<String>> response) {
@@ -97,7 +151,13 @@ public class Frag2 extends Fragment {
 
         //retrofit api creation
         RetrofitAPI retrofitAPI = ApiClient.getClient().create(RetrofitAPI.class);
-        Call<List<String>> callpostIDs = retrofitAPI.getPostID();
+        Call<List<String>> callpostIDs;
+        if(hotchip.isChecked()){
+            callpostIDs = retrofitAPI.getPostID_hot();
+        }
+        else{
+            callpostIDs = retrofitAPI.getPostID();
+        }
         callpostIDs.enqueue(new Callback<List<String>>() {
             @Override
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {
@@ -147,9 +207,16 @@ public class Frag2 extends Fragment {
         int imgindex = resultCode;
 
 
-
+        Chip newchip = getActivity().findViewById(R.id.newchip);
+        Chip hotchip = getActivity().findViewById(R.id.hotchip);
         RetrofitAPI retrofitAPI = ApiClient.getClient().create(RetrofitAPI.class);
-        Call<List<String>> callpostIDs = retrofitAPI.getPostID();
+        Call<List<String>> callpostIDs;
+        if(hotchip.isChecked()){
+            callpostIDs = retrofitAPI.getPostID_hot();
+        }
+        else{
+            callpostIDs = retrofitAPI.getPostID();
+        }
         callpostIDs.enqueue(new Callback<List<String>>() {
             @Override
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {

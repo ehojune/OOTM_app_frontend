@@ -36,6 +36,8 @@ import com.example.cloth_recommender.server.UserData;
 import com.example.cloth_recommender.server.postInfo;
 import com.kakao.sdk.user.UserApiClient;
 
+import org.w3c.dom.Text;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -56,6 +58,8 @@ public class ViewPostActivity extends Activity {
     private ImageButton btn;
     private static final String TAG = "ViewPostActivity";
     private String mCurrentPhotoPath;
+    public static int likenum;
+    public static int marknum;
 
     PopupWindow popUp;
     TextView postuser;
@@ -69,6 +73,7 @@ public class ViewPostActivity extends Activity {
     ArrayList<String> likeIDs;
     ArrayList<String> MarkIDs;
     UserData userinfo;
+    TextView likenumtxt;
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
@@ -87,6 +92,7 @@ public class ViewPostActivity extends Activity {
         markbtn = findViewById(R.id.markbtn);
         date = findViewById(R.id.datetext);
         userimg = findViewById(R.id.userimage);
+        likenumtxt = findViewById(R.id.likenum);
         RetrofitAPI retrofitAPI = ApiClient.getClient().create(RetrofitAPI.class);
 
 
@@ -111,6 +117,10 @@ public class ViewPostActivity extends Activity {
                 userbody.setText( postinfo.userBody.height +"cm - " + postinfo.userBody.weight+ "kg");
                 genre.setText(postinfo.postgenre);
                 date.setText(postinfo.date);
+                likenum = postinfo.wishUsers.size();
+                Log.d("likenum", String.valueOf(likenum));
+                marknum = postinfo.markUsers.size();
+                likenumtxt.setText(Integer.toString(likenum));
 
                 App appState = ((App)getApplicationContext());
 
@@ -261,6 +271,14 @@ public class ViewPostActivity extends Activity {
                         idmap.put("postid", postID);
 
                         idmap.put("userid", appState.getState());
+                        if(wishbtn.isChecked()){
+                            likenumtxt.setText(Integer.toString(likenum+1));
+                            likenum += 1;
+                        }
+                        else{
+                            likenum -= 1;
+                            likenumtxt.setText(Integer.toString(likenum));
+                        }
 
                         Call<Void> setLikecall = retrofitAPI.setLike(idmap);
                         setLikecall.enqueue(new Callback<Void>() {
@@ -285,7 +303,6 @@ public class ViewPostActivity extends Activity {
 
 
                         idmap.put("userid", appState.getState());
-
                         Call<Void> setMarkcall = retrofitAPI.setMark(idmap);
                         setMarkcall.enqueue(new Callback<Void>() {
                             @Override
