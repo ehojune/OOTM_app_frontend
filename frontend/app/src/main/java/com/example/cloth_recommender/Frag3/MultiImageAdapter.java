@@ -1,4 +1,4 @@
-package com.example.cloth_recommender.Frag2;
+package com.example.cloth_recommender.Frag3;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.cloth_recommender.Frag2.ViewPostActivity;
 import com.example.cloth_recommender.R;
 
 import java.util.ArrayList;
