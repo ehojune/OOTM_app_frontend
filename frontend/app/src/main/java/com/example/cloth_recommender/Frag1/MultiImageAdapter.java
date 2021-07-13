@@ -1,4 +1,4 @@
-package com.example.cloth_recommender.Frag2;
+package com.example.cloth_recommender.Frag1;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.cloth_recommender.Frag2.ViewPostActivity;
 import com.example.cloth_recommender.R;
 
 import java.util.ArrayList;
@@ -59,7 +60,6 @@ public class MultiImageAdapter extends RecyclerView.Adapter<MultiImageAdapter.Vi
         Glide.with(mContext)
                 .load("https://cdn.pixabay.com/photo/2019/12/26/10/44/horse-4720178_1280.jpg")
                 .into(holder.image);
-
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

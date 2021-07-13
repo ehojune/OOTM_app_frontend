@@ -3,6 +3,7 @@ package com.example.cloth_recommender.Frag3;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.cloth_recommender.LoginActivity;
@@ -31,6 +34,8 @@ import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -46,6 +51,14 @@ public class LoginViewActivity extends Fragment {
     String strEmail, strAgeRange, strGender, strBirthday;
 
     List<UserData> forTest;
+
+    private static final String TAG = "MultiImageActivity";
+    ArrayList<Uri> uriList = new ArrayList<>();     // 이미지의 uri를 담을 ArrayList 객체
+    public static ArrayList<String> postIDList = new ArrayList<>();
+
+    RecyclerView recyclerView;  // 이미지를 보여줄 리사이클러뷰
+    public static com.example.cloth_recommender.Frag3.MultiImageAdapter adapter;  // 리사이클러뷰에 적용시킬 어댑터
+    String strID2;
 
 
     @Override
@@ -196,6 +209,38 @@ public class LoginViewActivity extends Fragment {
                         }).show();
             }
         });
+
+        // Frag2에서 그대로 가져옴
+
+        //retrofit api creation
+        RetrofitAPI retrofitAPI2 = ApiClient.getClient().create(RetrofitAPI.class);
+        Call<List<String>> callpostIDs = retrofitAPI2.getPostID();
+        callpostIDs.enqueue(new Callback<List<String>>() {
+            @Override
+            public void onResponse(Call<List<String>> call, Response<List<String>> response) {
+                postIDList.clear();
+                ArrayList<String> newList = (ArrayList<String>) response.body();;
+                postIDList.addAll(newList);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<List<String>> call, Throwable t) {
+            }
+        });
+
+        recyclerView = v.findViewById(R.id.recyclerView2);
+        adapter = new com.example.cloth_recommender.Frag3.MultiImageAdapter(postIDList, getActivity().getApplicationContext());
+        recyclerView.setAdapter(adapter);
+        //recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
+        recyclerView.setLayoutManager(gridLayoutManager);
+
         return v;
+
+
+
+
+
     }
 }
