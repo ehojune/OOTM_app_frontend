@@ -25,11 +25,11 @@ public class PopupActivity extends Activity {
         setContentView(R.layout.frag2_popup);
 
         //UI 객체생성
-        out = (TextView)findViewById(R.id.Out);
-        top = (TextView)findViewById(R.id.Top);
-        bot = (TextView)findViewById(R.id.Bot);
-        acc = (TextView)findViewById(R.id.Acc);
-        sho = (TextView)findViewById(R.id.Sho);
+        out = (TextView)findViewById(R.id.name);
+        top = (TextView)findViewById(R.id.email);
+        bot = (TextView)findViewById(R.id.age);
+        acc = (TextView)findViewById(R.id.gender);
+        sho = (TextView)findViewById(R.id.birthday);
 
 
         //데이터 가져오기

@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:id="@+id/Out"
+            android:id="@+id/name"
             android:textSize="15sp"
             android:textColor="#000"
             android:alpha="0.87"
@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/Top"
+            android:id="@+id/email"
             android:textSize="15sp"
             android:textColor="#000"
             android:alpha="0.87"
@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/Bot"
+            android:id="@+id/age"
             android:textSize="15sp"
             android:textColor="#000"
             android:alpha="0.87"
@@ -50,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/Acc"
+            android:id="@+id/gender"
             android:textSize="15sp"
             android:textColor="#000"
             android:alpha="0.87"
@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/Sho"
+            android:id="@+id/birthday"
             android:textSize="15sp"
             android:textColor="#000"
             android:alpha="0.87"

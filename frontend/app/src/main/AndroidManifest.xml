@@ -27,6 +27,8 @@
         </activity>
         <activity android:name=".TabActivity"/>
         <activity android:name=".Frag3.LoginViewActivity"/>
+        <activity android:name=".Frag3.UserInfoPopupActivity"
+            android:theme="@style/Theme.AppCompat.Dialog"/>
         <activity android:name=".Frag2.NewPostActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".Frag2.ViewPostActivity" />

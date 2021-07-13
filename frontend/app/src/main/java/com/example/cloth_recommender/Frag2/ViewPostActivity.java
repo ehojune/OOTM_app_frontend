@@ -28,6 +28,7 @@ import androidx.annotation.RequiresApi;
 import com.bumptech.glide.Glide;
 import com.example.cloth_recommender.App;
 import com.example.cloth_recommender.Frag3.LoginViewActivity;
+import com.example.cloth_recommender.Frag3.UserInfoPopupActivity;
 import com.example.cloth_recommender.R;
 import com.example.cloth_recommender.server.ApiClient;
 import com.example.cloth_recommender.server.RetrofitAPI;
@@ -157,8 +158,8 @@ public class ViewPostActivity extends Activity {
 
 
 
-                Intent popintent = new Intent(getApplicationContext(), PopupActivity.class);
-                ImageButton itempopup = findViewById(R.id.itempopup1);
+                Intent popintent = new Intent(getApplicationContext(), UserInfoPopupActivity.class);
+                Button itempopup = findViewById(R.id.btnDetailInfo);
                 itempopup.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

@@ -11,7 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,7 +38,6 @@ import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,6 +52,10 @@ public class LoginViewActivity extends Fragment {
     String strProfile;
     String strID;
     String strEmail, strAgeRange, strGender, strBirthday;
+
+    PopupWindow popUp;
+
+
     List<UserData> forTest;
     public static ArrayList<String> postIDList = new ArrayList<>();
     RecyclerView recyclerView;  // 이미지를 보여줄 리사이클러뷰
@@ -89,19 +94,24 @@ public class LoginViewActivity extends Fragment {
             };
         });
 
-
-
         RetrofitAPI retrofitAPI = ApiClient.getClient().create(RetrofitAPI.class);
+
+
+
+
+
+
+
 
         TextView tvNickname = v.findViewById(R.id.tvNickname);
         ImageView ivProfile = v.findViewById(R.id.ivProfile);
         Button btnLogout = v.findViewById(R.id.btnLogout);
         Button btnSignout = v.findViewById(R.id.btnSignout);
 
-        TextView tvEmail = v.findViewById(R.id.tvEmail);
-        TextView tvAgeRange = v.findViewById(R.id.tvAgeRange);
-        TextView tvGender = v.findViewById(R.id.tvGender);
-        TextView tvBirthday = v.findViewById(R.id.tvBirthday);
+        //TextView tvEmail = v.findViewById(R.id.tvEmail);
+        //TextView tvAgeRange = v.findViewById(R.id.tvAgeRange);
+        //TextView tvGender = v.findViewById(R.id.tvGender);
+        //TextView tvBirthday = v.findViewById(R.id.tvBirthday);
 
         Intent intent = getActivity().getIntent();
         strNickname = intent.getStringExtra("name");
@@ -123,18 +133,40 @@ public class LoginViewActivity extends Fragment {
             }
         });
 
-        strEmail = intent.getStringExtra("email");
+        //strEmail = intent.getStringExtra("email");
         strAgeRange = intent.getStringExtra("ageRange");
         strGender = intent.getStringExtra("gender");
         strBirthday = intent.getStringExtra("birthday");
 
+
+        Intent popintent = new Intent(getContext(), UserInfoPopupActivity.class);
+        Button btn_DetailInfo_popup = v.findViewById(R.id.btnDetailInfo);
+        btn_DetailInfo_popup.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popintent.putExtra("name", strNickname);
+                //popintent.putExtra("email", strEmail);
+                popintent.putExtra("age", strAgeRange);
+                popintent.putExtra("gender", strGender);
+                popintent.putExtra("birthday", strBirthday);
+                startActivity(popintent);
+            }
+        });
+
+
+
         tvNickname.setText(strNickname);
         Glide.with(getActivity()).load(strProfile).circleCrop().into(ivProfile);
 
-        tvEmail.setText(strEmail);
-        tvAgeRange.setText(strAgeRange);
-        tvGender.setText(strGender);
-        tvBirthday.setText(strBirthday);
+        //tvEmail.setText(strEmail);
+        //tvAgeRange.setText(strAgeRange);
+        //tvGender.setText(strGender);
+        //tvBirthday.setText(strBirthday);
+
+
+
+
+
 
         btnLogout.setOnClickListener(new Button.OnClickListener() {
             @Override
