@@ -82,6 +82,8 @@ public class ViewPostActivity extends Activity {
         markbtn = findViewById(R.id.markbtn);
         date = findViewById(R.id.datetext);
 
+        App appState = ((App)getApplicationContext());
+
         Intent intent = getIntent();
         String postID = intent.getStringExtra("postID");
         String userid;
@@ -158,7 +160,7 @@ public class ViewPostActivity extends Activity {
                     public void onResponse(Call<List<String>> call, Response<List<String>> response) {
                         likeIDs = (ArrayList<String>) response.body();
                         Log.d("likeIDs", likeIDs.toString());
-                        if(likeIDs.contains(postinfo.userID)){
+                        if(likeIDs.contains(appState.getState())){
                             wishbtn.setChecked(true);
                         }
                         else{
@@ -175,7 +177,7 @@ public class ViewPostActivity extends Activity {
                     @Override
                     public void onResponse(Call<List<String>> call, Response<List<String>> response) {
                         MarkIDs = (ArrayList<String>) response.body();
-                        if(MarkIDs.contains(postinfo.userID)){
+                        if(MarkIDs.contains(appState.getState())){
                             markbtn.setChecked(true);
                         }
                         else{
@@ -194,7 +196,7 @@ public class ViewPostActivity extends Activity {
                         //Log.d("click", "click");
                         HashMap<String,String> idmap = new HashMap<>();
                         idmap.put("postid", postID);
-                        App appState = ((App)getApplicationContext());
+
                         idmap.put("userid", appState.getState());
 
                         Call<Void> setLikecall = retrofitAPI.setLike(idmap);
@@ -217,7 +219,8 @@ public class ViewPostActivity extends Activity {
 
                         HashMap<String,String> idmap = new HashMap<>();
                         idmap.put("postid", postID);
-                        App appState = ((App)getApplicationContext());
+
+
                         idmap.put("userid", appState.getState());
 
                         Call<Void> setMarkcall = retrofitAPI.setMark(idmap);
