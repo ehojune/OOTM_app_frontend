@@ -1,5 +1,6 @@
 package com.example.cloth_recommender;
 
+import android.app.Application;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -23,6 +24,7 @@ import com.kakao.util.exception.KakaoException;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
 
 public class LoginActivity extends AppCompatActivity {
     private SessionCallback sessionCallback;
@@ -85,6 +87,8 @@ public class LoginActivity extends AppCompatActivity {
                     intent.putExtra("profile", result.getProfileImagePath());
                     intent.putExtra("userid", String.valueOf(result.getId()));
                     Log.d("Kakaoid", String.valueOf(result.getId()));
+                    App appState = ((App)getApplicationContext());
+                    appState.setState(String.valueOf(result.getId()));
 
                     if(result.getKakaoAccount().hasEmail() == OptionalBoolean.TRUE)
                         intent.putExtra("email", result.getKakaoAccount().getEmail());

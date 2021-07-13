@@ -60,6 +60,7 @@ public class NewPostActivity extends AppCompatActivity {
     private CheckBox Street;
     private CheckBox Amekaji;
     private CheckBox Cityboy;
+    public static String strID;
 
 
 
@@ -74,7 +75,7 @@ public class NewPostActivity extends AppCompatActivity {
 
         //post할 때 user 정보
         Intent intentfrag2 = getIntent();
-        String strID = intentfrag2.getStringExtra("userid");
+        strID = intentfrag2.getStringExtra("userid");
         Log.d("strID", strID);
 
         Call<UserData> calluser = retrofitAPI.getUser(strID);

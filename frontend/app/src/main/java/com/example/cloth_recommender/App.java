@@ -14,6 +14,15 @@ public class App extends Application {
 
     private static volatile App instance = null;
 
+    private String userID;
+
+    public String getState(){
+        return userID;
+    }
+    public void setState(String s){
+        userID = s;
+    }
+
     private static class KakaoSDKAdapter extends KakaoAdapter {
         /**
          * Session Config에 대해서는 default값들이 존재한다.

@@ -29,8 +29,8 @@ public class TabActivity extends AppCompatActivity {
         adapter=new FragmentAdapter(getSupportFragmentManager(),1);
 
         //FragmentAdapter에 컬렉션 담기
-        adapter.addFragment(new Frag1());
         adapter.addFragment(new Frag2());
+        adapter.addFragment(new Frag1());
         adapter.addFragment(new LoginViewActivity());
 
         //ViewPager Fragment 연결

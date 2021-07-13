@@ -42,7 +42,7 @@ public class LoginViewActivity extends Fragment {
 
     String strNickname;
     String strProfile;
-    String strID;
+    public static String strID;
     String strEmail, strAgeRange, strGender, strBirthday;
 
     List<UserData> forTest;

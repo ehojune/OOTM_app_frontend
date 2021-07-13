@@ -22,9 +22,11 @@ public class MultiImageAdapter extends RecyclerView.Adapter<MultiImageAdapter.Vi
     boolean isImageFitToScreen;
     // 생성자에서 데이터 리스트 객체, Context를 전달받음.
     MultiImageAdapter(ArrayList<String> list, Context context) {
+
         mData = list ;
         mContext = context;
     }
+
 
     // 아이템 뷰를 저장하는 뷰홀더 클래스.
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -46,6 +48,7 @@ public class MultiImageAdapter extends RecyclerView.Adapter<MultiImageAdapter.Vi
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) ;    // context에서 LayoutInflater 객체를 얻는다.
         View view = inflater.inflate(R.layout.frag2_multi_image_item, parent, false) ;	// 리사이클러뷰에 들어갈 아이템뷰의 레이아웃을 inflate.
         ViewHolder vh = new ViewHolder(view) ;
+
 
         return vh ;
     }

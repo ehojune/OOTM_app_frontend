@@ -24,11 +24,14 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
+import com.example.cloth_recommender.App;
+import com.example.cloth_recommender.Frag3.LoginViewActivity;
 import com.example.cloth_recommender.R;
 import com.example.cloth_recommender.server.ApiClient;
 import com.example.cloth_recommender.server.RetrofitAPI;
 import com.example.cloth_recommender.server.UserData;
 import com.example.cloth_recommender.server.postInfo;
+import com.kakao.sdk.user.UserApiClient;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -81,6 +84,11 @@ public class ViewPostActivity extends Activity {
 
         Intent intent = getIntent();
         String postID = intent.getStringExtra("postID");
+        String userid;
+
+
+
+
         //retrofit api creation
         RetrofitAPI retrofitAPI = ApiClient.getClient().create(RetrofitAPI.class);
         Call<postInfo> callpost = retrofitAPI.getPost(postID);
@@ -149,6 +157,7 @@ public class ViewPostActivity extends Activity {
                     @Override
                     public void onResponse(Call<List<String>> call, Response<List<String>> response) {
                         likeIDs = (ArrayList<String>) response.body();
+                        Log.d("likeIDs", likeIDs.toString());
                         if(likeIDs.contains(postinfo.userID)){
                             wishbtn.setChecked(true);
                         }
@@ -185,7 +194,9 @@ public class ViewPostActivity extends Activity {
                         //Log.d("click", "click");
                         HashMap<String,String> idmap = new HashMap<>();
                         idmap.put("postid", postID);
-                        idmap.put("userid", postinfo.userID);
+                        App appState = ((App)getApplicationContext());
+                        idmap.put("userid", appState.getState());
+
                         Call<Void> setLikecall = retrofitAPI.setLike(idmap);
                         setLikecall.enqueue(new Callback<Void>() {
                             @Override
@@ -202,9 +213,13 @@ public class ViewPostActivity extends Activity {
                 markbtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
+
                         HashMap<String,String> idmap = new HashMap<>();
                         idmap.put("postid", postID);
-                        idmap.put("userid", postinfo.userID);
+                        App appState = ((App)getApplicationContext());
+                        idmap.put("userid", appState.getState());
+
                         Call<Void> setMarkcall = retrofitAPI.setMark(idmap);
                         setMarkcall.enqueue(new Callback<Void>() {
                             @Override
@@ -224,11 +239,6 @@ public class ViewPostActivity extends Activity {
             }
         });
 
-
-        //like, bookmark state 받아오는 get
-
-
-        //like, bookmark state 갱신 post
 
 
 

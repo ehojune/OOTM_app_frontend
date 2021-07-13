@@ -42,8 +42,7 @@ public class Frag2 extends Fragment {
 
     RecyclerView recyclerView;  // 이미지를 보여줄 리사이클러뷰
     public static MultiImageAdapter adapter;  // 리사이클러뷰에 적용시킬 어댑터
-
-
+    String strID;
 
     public Frag2() {
         // Required empty public constructor
@@ -59,7 +58,7 @@ public class Frag2 extends Fragment {
             public void onClick(View v) {
                 Intent intentnewpost = new Intent(v.getContext(), NewPostActivity.class);
                 Intent intent = getActivity().getIntent();
-                String strID = intent.getStringExtra("userid");
+                strID = intent.getStringExtra("userid");
                 intentnewpost.putExtra("userid", strID);
                 startActivityForResult(intentnewpost, 1);
             }
@@ -116,7 +115,7 @@ public class Frag2 extends Fragment {
             }
         });
         recyclerView = getActivity().findViewById(R.id.recyclerView);
-        adapter = new MultiImageAdapter(postIDList, getActivity().getApplicationContext());
+        adapter = new MultiImageAdapter( postIDList, getActivity().getApplicationContext());
         recyclerView.setAdapter(adapter);
         //recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
