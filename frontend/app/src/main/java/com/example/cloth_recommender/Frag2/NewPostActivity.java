@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -68,6 +70,7 @@ public class NewPostActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.frag2_activity_newpostactivity);
 
         //retrofit api creation
@@ -94,46 +97,19 @@ public class NewPostActivity extends AppCompatActivity {
         });
 
 
-
-
-
+        Intent selectimgintent = new Intent(getApplicationContext(), PopupSelectActivity.class);
         getImage = this.findViewById(R.id.Uploadimg1);
         getImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /**
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
                 intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, 201);
-            }
-        });
-
-
-        getImage2 = this.findViewById(R.id.Uploadimg2);
-        getImage2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent2 = new Intent(Intent.ACTION_PICK);
-                intent2.setType(MediaStore.Images.Media.CONTENT_TYPE);
-                intent2.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-                intent2.setAction(Intent.ACTION_GET_CONTENT);
-                intent2.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent2, 202);
-            }
-        });
-
-        getImage3 = this.findViewById(R.id.Uploadimg3);
-        getImage3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent3 = new Intent(Intent.ACTION_PICK);
-                intent3.setType(MediaStore.Images.Media.CONTENT_TYPE);
-                intent3.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-                intent3.setAction(Intent.ACTION_GET_CONTENT);
-                intent3.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent3, 203);
+                startActivityForResult(intent, 201);*/
+                startActivity(selectimgintent);
             }
         });
 
