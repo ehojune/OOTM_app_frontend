@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.ImageDecoder;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -105,7 +106,6 @@ public class ViewPostActivity extends Activity {
             @Override
             public void onResponse(Call<postInfo> call, Response<postInfo> response) {
                 postinfo = response.body();
-                img.setImageResource(R.drawable.app_logo);
                 postuser.setText(postinfo.userName);
                 userbody.setText( postinfo.userBody.height +"cm - " + postinfo.userBody.weight+ "kg");
                 genre.setText(postinfo.postgenre);
@@ -127,6 +127,34 @@ public class ViewPostActivity extends Activity {
                         Log.d("userinfo", "fail");
                     }
                 });
+
+                ArrayList<Drawable> imgarr = new ArrayList<Drawable>();
+                imgarr.add(getResources().getDrawable(R.drawable.outfit1));
+                imgarr.add(getResources().getDrawable(R.drawable.outfit2));
+                imgarr.add(getResources().getDrawable(R.drawable.outfit3));
+                imgarr.add(getResources().getDrawable(R.drawable.outfit4));
+                imgarr.add(getResources().getDrawable(R.drawable.outfit5));
+                imgarr.add(getResources().getDrawable(R.drawable.outfit6));
+                imgarr.add(getResources().getDrawable(R.drawable.outfit7));
+                imgarr.add(getResources().getDrawable(R.drawable.outfit8));
+                imgarr.add(getResources().getDrawable(R.drawable.outfit9));
+                imgarr.add(getResources().getDrawable(R.drawable.clothicon));
+
+
+                Call<postInfo> callimg = retrofitAPI.getPost(postID);
+                callimg.enqueue(new Callback<postInfo>() {
+                    @Override
+                    public void onResponse(Call<postInfo> call, Response<postInfo> response) {
+                        int imgindex = Integer.parseInt(response.body().postImage);
+                        img.setImageDrawable(imgarr.get(imgindex));
+                    }
+                    @Override
+                    public void onFailure(Call<postInfo> call, Throwable t) {
+                        Log.d("userinfo", "fail");
+                    }
+                });
+
+
 
 
                 Intent popintent = new Intent(getApplicationContext(), PopupActivity.class);

@@ -18,6 +18,9 @@ public class postInfo {
     @SerializedName("date")
     public String date;
 
+    @SerializedName("postImage")
+    public String postImage;
+
     public class userBody {
         @SerializedName("height")
         public String height;

@@ -65,6 +65,7 @@ public class NewPostActivity extends AppCompatActivity {
     private CheckBox Amekaji;
     private CheckBox Cityboy;
     public static String strID;
+    int imgindex;
 
 
 
@@ -200,6 +201,8 @@ public class NewPostActivity extends AppCompatActivity {
                     postmap.put("acc", AccInfo);
                     postmap.put("genrearray", Genre.substring(0, Genre.length()-1));
                     postmap.put("date", getDate);
+                    postmap.put("postImage", String.valueOf(imgindex));
+
                     Log.d("GenreArray", Genre.substring(0, Genre.length()-1));
                     Call<Void> calladdpost = retrofitAPI.addPost(postmap);
                     calladdpost.enqueue(new Callback<Void>() {
@@ -232,9 +235,13 @@ public class NewPostActivity extends AppCompatActivity {
         imgarr.add(getResources().getDrawable(R.drawable.clothicon));
         if(resultCode-1>=0){
             getImage.setImageDrawable(imgarr.get(resultCode-1));
+            setResult(resultCode-1);
+            imgindex = resultCode-1;
         }
         else{
             getImage.setImageDrawable(imgarr.get(9));
+            setResult(9);
+            imgindex = 9;
         }
 
 
