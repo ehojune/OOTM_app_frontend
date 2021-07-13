@@ -88,6 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                     intent.putExtra("userid", String.valueOf(result.getId()));
                     Log.d("Kakaoid", String.valueOf(result.getId()));
                     App appState = ((App)getApplicationContext());
+
                     appState.setState(String.valueOf(result.getId()));
                     appState.setProfile(result.getProfileImagePath());
 

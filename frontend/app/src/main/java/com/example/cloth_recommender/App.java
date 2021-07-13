@@ -21,13 +21,13 @@ public class App extends Application {
         return userID;
     }
     public String getProfile(){
-        return userID;
+        return userProfile;
     }
     public void setState(String s){
         userID = s;
     }
     public void setProfile(String s){
-        userID = s;
+        userProfile = s;
     }
 
     private static class KakaoSDKAdapter extends KakaoAdapter {
