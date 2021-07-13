@@ -5,25 +5,88 @@
     android:id="@+id/frag1_refresh_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <RelativeLayout
-        android:id="@+id/Relativelayout"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/myconstraintlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Frag1.Frag1"
-        android:orientation="vertical">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView_frag1"
+        android:orientation="vertical"
+        tools:context=".Frag1.Frag1">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="686dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="3dp"
-            android:orientation="horizontal">
+            android:layout_height="80dp"
+            android:background="@color/white">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20sp"
+                android:src="@drawable/app_logo"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:backgroundTint="@color/white"
+                android:layout_gravity="center_vertical"
+                android:text="BOOKMARK"
+                android:textSize="30sp"
+                android:textStyle="bold|italic"
+                android:textColor="@color/black"
+                />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="7dp"
+            android:background="#EFEFEF"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@color/white"/>
 
-        </androidx.recyclerview.widget.RecyclerView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView_frag1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="100dp">
+
+            </androidx.recyclerview.widget.RecyclerView>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/NewPostActivity1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="44dp"
+                android:layout_marginRight="20sp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/ic_baseline_add_24"
+                android:src="@drawable/ic_baseline_add_24"
+                app:backgroundTint="@color/browser_actions_bg_grey"
+                app:rippleColor="@color/black" />
+        </RelativeLayout>
 
 
-    </RelativeLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/NewPostActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="44dp"
+            android:background="@drawable/ic_baseline_add_24"
+            android:src="@drawable/ic_baseline_add_24"
+            app:backgroundTint="@color/browser_actions_bg_grey"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.947"
+            app:layout_constraintStart_toStartOf="parent"
+            app:rippleColor="@color/black" />
+
+
+    </LinearLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

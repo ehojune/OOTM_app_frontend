@@ -79,6 +79,18 @@ public class Frag1 extends Fragment {
             };
         });
 
+        FloatingActionButton btn_Newpostactivity = v.findViewById(R.id.NewPostActivity1);
+        btn_Newpostactivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentnewpost = new Intent(v.getContext(), NewPostActivity.class);
+                Intent intent = getActivity().getIntent();
+                strID = intent.getStringExtra("userid");
+                intentnewpost.putExtra("userid", strID);
+                startActivityForResult(intentnewpost, 1);
+
+            }
+        });
 
         //retrofit api creation
         RetrofitAPI retrofitAPI = ApiClient.getClient().create(RetrofitAPI.class);
