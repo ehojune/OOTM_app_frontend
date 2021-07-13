@@ -1,8 +1,10 @@
 package com.example.cloth_recommender.Frag2;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,11 +21,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 import com.example.cloth_recommender.R;
 import com.example.cloth_recommender.server.ApiClient;
@@ -66,12 +68,16 @@ public class NewPostActivity extends AppCompatActivity {
 
 
 
+
+
     @Nullable
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.frag2_activity_newpostactivity);
+
+
 
         //retrofit api creation
         RetrofitAPI retrofitAPI = ApiClient.getClient().create(RetrofitAPI.class);
@@ -109,9 +115,14 @@ public class NewPostActivity extends AppCompatActivity {
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, 201);*/
-                startActivity(selectimgintent);
+                startActivityForResult(selectimgintent, 1);
             }
         });
+
+
+
+
+        //getImage.setImageResource(R.drawable.outfit1);
 
 
         btn_back = this.findViewById(R.id.Back);
@@ -208,18 +219,25 @@ public class NewPostActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(201, resultCode, data);
-
-        if(data == null){   // 어떤 이미지도 선택하지 않은 경우
-            Toast.makeText(getApplicationContext(), "이미지를 선택하지 않았습니다.", Toast.LENGTH_LONG).show();
+        ArrayList<Drawable> imgarr = new ArrayList<Drawable>();
+        imgarr.add(getResources().getDrawable(R.drawable.outfit1));
+        imgarr.add(getResources().getDrawable(R.drawable.outfit2));
+        imgarr.add(getResources().getDrawable(R.drawable.outfit3));
+        imgarr.add(getResources().getDrawable(R.drawable.outfit4));
+        imgarr.add(getResources().getDrawable(R.drawable.outfit5));
+        imgarr.add(getResources().getDrawable(R.drawable.outfit6));
+        imgarr.add(getResources().getDrawable(R.drawable.outfit7));
+        imgarr.add(getResources().getDrawable(R.drawable.outfit8));
+        imgarr.add(getResources().getDrawable(R.drawable.outfit9));
+        imgarr.add(getResources().getDrawable(R.drawable.clothicon));
+        if(resultCode-1>=0){
+            getImage.setImageDrawable(imgarr.get(resultCode-1));
         }
-        else{   // 이미지를 하나라도 선택한 경우
-            if(data.getClipData() == null){     // 이미지를 하나만 선택한 경우
-                Log.e("single choice: ", String.valueOf(data.getData()));
-                imageUri = data.getData();
-                getImage.setImageURI(imageUri);
-
-            }
+        else{
+            getImage.setImageDrawable(imgarr.get(9));
         }
+
+
     }
 
 }

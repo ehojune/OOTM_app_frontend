@@ -2,6 +2,7 @@ package com.example.cloth_recommender;
 
 import android.app.Application;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 
 import com.kakao.auth.ApprovalType;
 import com.kakao.auth.AuthType;
@@ -9,6 +10,8 @@ import com.kakao.auth.IApplicationConfig;
 import com.kakao.auth.ISessionConfig;
 import com.kakao.auth.KakaoAdapter;
 import com.kakao.auth.KakaoSDK;
+
+import java.util.ArrayList;
 
 public class App extends Application {
 

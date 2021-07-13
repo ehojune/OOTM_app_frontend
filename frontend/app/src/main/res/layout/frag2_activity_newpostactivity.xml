@@ -70,8 +70,9 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_weight="1"
+            android:backgroundTint="@color/black"
             android:clickable="true"
-            app:srcCompat="@drawable/app_logo" />
+            app:srcCompat="@drawable/clothicon" />
 
     </LinearLayout>
 
