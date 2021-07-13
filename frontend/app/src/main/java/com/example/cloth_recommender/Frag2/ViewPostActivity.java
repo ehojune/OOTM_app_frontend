@@ -176,31 +176,41 @@ public class ViewPostActivity extends Activity {
                     public void onClick(View v) {
                         HashMap<String,String> postidmap = new HashMap<>();
                         postidmap.put("_id", postID);
+                        postidmap.put("userid", appState.getState());
                         Call<Void> deleteCall = retrofitAPI.deletePost(postidmap);
                         deleteCall.enqueue(new Callback<Void>() {
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response) {
-                                RetrofitAPI retrofitAPI = ApiClient.getClient().create(RetrofitAPI.class);
-                                Call<List<String>> callpostIDs = retrofitAPI.getPostID();
-                                callpostIDs.enqueue(new Callback<List<String>>() {
-                                    @Override
-                                    public void onResponse(Call<List<String>> call, Response<List<String>> response) {
-                                        Frag2.postIDList.clear();
-                                        ArrayList<String> newList = (ArrayList<String>) response.body();;
-                                        Frag2.postIDList.addAll(newList);
-                                        Frag2.adapter.notifyDataSetChanged();
-                                    }
+                                Log.d("statuscode", String.valueOf(response.body()));
+                                if(response.code() == 404){
 
-                                    @Override
-                                    public void onFailure(Call<List<String>> call, Throwable t) {
-                                    }
-                                });
+                                    Toast.makeText(getApplicationContext(),"작성자만 삭제할 수 있습니다.", Toast.LENGTH_SHORT).show();
+                                }
+                                else{
+                                    RetrofitAPI retrofitAPI = ApiClient.getClient().create(RetrofitAPI.class);
+                                    Call<List<String>> callpostIDs = retrofitAPI.getPostID();
+                                    callpostIDs.enqueue(new Callback<List<String>>() {
+                                        @Override
+                                        public void onResponse(Call<List<String>> call, Response<List<String>> response) {
+                                            Frag2.postIDList.clear();
+                                            ArrayList<String> newList = (ArrayList<String>) response.body();;
+                                            Frag2.postIDList.addAll(newList);
+                                            Frag2.adapter.notifyDataSetChanged();
+                                            finish();
+                                        }
+                                        @Override
+                                        public void onFailure(Call<List<String>> call, Throwable t) {
+
+                                        }
+                                    });
+
+                                }
                             }
                             @Override
                             public void onFailure(Call<Void> call, Throwable t) {
                             }
                         });
-                        finish();
+
                     }
                 });
 

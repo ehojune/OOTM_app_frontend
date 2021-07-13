@@ -39,7 +39,7 @@ public interface RetrofitAPI {
     Call<Void> addPost(@Body HashMap<String,String> postmap);
 
     @POST("/post/delete")
-    Call<Void> deletePost(@Body HashMap<String,String> postid);
+    Call<Void> deletePost(@Body HashMap<String,String> map);
 
     @POST("/post/setlike")
     Call<Void> setLike(@Body HashMap<String,String> idmap);
