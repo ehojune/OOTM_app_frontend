@@ -59,7 +59,7 @@ public class MultiImageAdapter extends RecyclerView.Adapter<MultiImageAdapter.Vi
         String postID = mData.get(position) ;
 
         Glide.with(mContext)
-                .load(R.drawable.app_logo)
+                .load("https://cdn.pixabay.com/photo/2019/12/26/10/44/horse-4720178_1280.jpg")
                 .into(holder.image);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

@@ -76,7 +76,7 @@ public class NewPostActivity extends AppCompatActivity {
         //post할 때 user 정보
         Intent intentfrag2 = getIntent();
         strID = intentfrag2.getStringExtra("userid");
-        Log.d("strID", strID);
+
 
         Call<UserData> calluser = retrofitAPI.getUser(strID);
 

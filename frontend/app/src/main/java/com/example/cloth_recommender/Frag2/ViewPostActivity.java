@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
+import com.bumptech.glide.Glide;
 import com.example.cloth_recommender.App;
 import com.example.cloth_recommender.Frag3.LoginViewActivity;
 import com.example.cloth_recommender.R;
@@ -48,6 +49,7 @@ import retrofit2.Response;
 public class ViewPostActivity extends Activity {
 
     private ImageView img;
+    private ImageView userimg;
     private EditText cmt;
     private ImageButton btn;
     private static final String TAG = "ViewPostActivity";
@@ -64,6 +66,7 @@ public class ViewPostActivity extends Activity {
     CheckBox markbtn;
     ArrayList<String> likeIDs;
     ArrayList<String> MarkIDs;
+    UserData userinfo;
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
@@ -81,8 +84,12 @@ public class ViewPostActivity extends Activity {
         wishbtn = findViewById(R.id.wishBtn);
         markbtn = findViewById(R.id.markbtn);
         date = findViewById(R.id.datetext);
+        userimg = findViewById(R.id.userimage);
+        RetrofitAPI retrofitAPI = ApiClient.getClient().create(RetrofitAPI.class);
 
-        App appState = ((App)getApplicationContext());
+
+
+
 
         Intent intent = getIntent();
         String postID = intent.getStringExtra("postID");
@@ -92,7 +99,7 @@ public class ViewPostActivity extends Activity {
 
 
         //retrofit api creation
-        RetrofitAPI retrofitAPI = ApiClient.getClient().create(RetrofitAPI.class);
+
         Call<postInfo> callpost = retrofitAPI.getPost(postID);
         callpost.enqueue(new Callback<postInfo>() {
             @Override
@@ -103,6 +110,23 @@ public class ViewPostActivity extends Activity {
                 userbody.setText( postinfo.userBody.height +"cm - " + postinfo.userBody.weight+ "kg");
                 genre.setText(postinfo.postgenre);
                 date.setText(postinfo.date);
+
+                App appState = ((App)getApplicationContext());
+
+                //post할 때 user 정보
+                Call<UserData> calluser = retrofitAPI.getUser(postinfo.userID);
+                calluser.enqueue(new Callback<UserData>() {
+                    @Override
+                    public void onResponse(Call<UserData> call, Response<UserData> response) {
+                        userinfo = response.body();
+                        //Log.d("userinfo", String.valueOf(userinfo.userName));
+                        Glide.with(userimg).load(userinfo.userProfile).circleCrop().into(userimg);
+                    }
+                    @Override
+                    public void onFailure(Call<UserData> call, Throwable t) {
+                        Log.d("userinfo", "fail");
+                    }
+                });
 
 
                 Intent popintent = new Intent(getApplicationContext(), PopupActivity.class);

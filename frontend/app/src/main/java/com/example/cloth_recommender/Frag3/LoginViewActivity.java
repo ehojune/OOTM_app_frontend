@@ -85,6 +85,7 @@ public class LoginViewActivity extends Fragment {
         HashMap<String,String> map = new HashMap<>();
         map.put("username", strNickname);
         map.put("userID", strID);
+        map.put("userProfile", strProfile);
 
         Call<Void> call2 = retrofitAPI.putNewUser(map);
         call2.enqueue(new Callback<Void>() {

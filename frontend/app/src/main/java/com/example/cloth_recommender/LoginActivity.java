@@ -89,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                     Log.d("Kakaoid", String.valueOf(result.getId()));
                     App appState = ((App)getApplicationContext());
                     appState.setState(String.valueOf(result.getId()));
+                    appState.setProfile(result.getProfileImagePath());
 
                     if(result.getKakaoAccount().hasEmail() == OptionalBoolean.TRUE)
                         intent.putExtra("email", result.getKakaoAccount().getEmail());

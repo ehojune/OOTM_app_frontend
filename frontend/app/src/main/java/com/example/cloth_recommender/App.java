@@ -15,11 +15,18 @@ public class App extends Application {
     private static volatile App instance = null;
 
     private String userID;
+    private String userProfile;
 
     public String getState(){
         return userID;
     }
+    public String getProfile(){
+        return userID;
+    }
     public void setState(String s){
+        userID = s;
+    }
+    public void setProfile(String s){
         userID = s;
     }
 
