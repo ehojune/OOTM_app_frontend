@@ -87,7 +87,10 @@ public class MultiImageAdapter extends RecyclerView.Adapter<MultiImageAdapter.Vi
         calluser.enqueue(new Callback<postInfo>() {
             @Override
             public void onResponse(Call<postInfo> call, Response<postInfo> response) {
-                mImgindex= Integer.parseInt(response.body().postImage);
+                if(response.body().postImage !=null){
+                    mImgindex= Integer.parseInt(response.body().postImage);
+                }
+
                 holder.image.setImageDrawable(mImgarr.get(mImgindex));
                 holder.marktext.setText(Integer.toString(response.body().markUsers.size()));
 

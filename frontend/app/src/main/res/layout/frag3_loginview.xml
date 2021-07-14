@@ -103,7 +103,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="My Post"
+            android:text="My Posts"
             android:textStyle="bold"
             android:textSize="30dp"
             android:layout_marginLeft="15sp"

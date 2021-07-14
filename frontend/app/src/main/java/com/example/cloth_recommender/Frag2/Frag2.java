@@ -59,14 +59,14 @@ public class Frag2 extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.frag2,container,false);
-
+        RetrofitAPI retrofitAPI2 = ApiClient.getClient().create(RetrofitAPI.class);
         Chip newchip = v.findViewById(R.id.newchip);
         Chip hotchip = v.findViewById(R.id.hotchip);
         newchip.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 hotchip.setChecked(!(newchip.isChecked()));
-                RetrofitAPI retrofitAPI2 = ApiClient.getClient().create(RetrofitAPI.class);
+
                 Call<List<String>> callpostIDs = retrofitAPI2.getPostID();
                 callpostIDs.enqueue(new Callback<List<String>>() {
                     @Override
@@ -75,10 +75,12 @@ public class Frag2 extends Fragment {
                         hotList = (ArrayList<String>) response.body();;
                         postIDList.addAll(hotList);
                         adapter.notifyDataSetChanged();
+                        Log.d("getpostid", "succ2");
                     }
 
                     @Override
                     public void onFailure(Call<List<String>> call, Throwable t) {
+                        Log.d("getpostid", "fail2");
                     }
                 });
             }
@@ -87,18 +89,19 @@ public class Frag2 extends Fragment {
             @Override
             public void onClick(View v) {
                 newchip.setChecked(!(hotchip.isChecked()));
-                RetrofitAPI retrofitAPI2 = ApiClient.getClient().create(RetrofitAPI.class);
                 Call<List<String>> callpostIDs = retrofitAPI2.getPostID_hot();
                 callpostIDs.enqueue(new Callback<List<String>>() {
                     @Override
                     public void onResponse(Call<List<String>> call, Response<List<String>> response) {
                         postIDList.clear();
                         newList = (ArrayList<String>) response.body();;
+                        Log.d("getpostid", response.body().get(0));
                         postIDList.addAll(newList);
                         adapter.notifyDataSetChanged();
                     }
                     @Override
                     public void onFailure(Call<List<String>> call, Throwable t) {
+                        Log.d("getpostid", "fail");
                     }
                 });
 
@@ -195,17 +198,10 @@ public class Frag2 extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // 앨범으로 이동하는 버튼
-    }
-
-    @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         int imgindex = resultCode;
-
 
         Chip newchip = getActivity().findViewById(R.id.newchip);
         Chip hotchip = getActivity().findViewById(R.id.hotchip);
